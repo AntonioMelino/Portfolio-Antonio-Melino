@@ -9,6 +9,7 @@ import {
   Linkedin,
   Twitter,
   Mail,
+  Instagram,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -57,14 +58,16 @@ export function HeroSection() {
                 Ver Proyectos
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="group bg-transparent"
-              >
-                <Download className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                Descargar CV
-              </Button>
+              <a href="/Antonio Melino - CV.pdf" download>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="group bg-transparent"
+                >
+                  <Download className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  Descargar CV
+                </Button>
+              </a>
             </div>
 
             <div className="flex items-center gap-3">
@@ -105,12 +108,12 @@ export function HeroSection() {
                 asChild
               >
                 <a
-                  href="https://twitter.com"
+                  href="https://www.instagram.com/tony.melino/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Twitter"
                 >
-                  <Twitter className="h-5 w-5" />
+                  <Instagram className="h-5 w-5" />
                 </a>
               </Button>
               <Button
@@ -119,7 +122,7 @@ export function HeroSection() {
                 className="rounded-full"
                 asChild
               >
-                <a href="mailto:tu@email.com" aria-label="Email">
+                <a href="mailto:antoniomelino1997@gmail.com" aria-label="Email">
                   <Mail className="h-5 w-5" />
                 </a>
               </Button>
@@ -142,7 +145,9 @@ export function HeroSection() {
                   <h3 className="text-white text-2xl font-bold mb-1">
                     Antonio Melino
                   </h3>
-                  <p className="text-white/90 text-sm">Full Stack Developer</p>
+                  <p className="text-white/90 text-sm">
+                    Desarrollador Full Stack
+                  </p>
                 </div>
               </div>
               {/* Elementos decorativos */}

@@ -10,6 +10,8 @@ const skillCategories = [
       "React.js",
       "Bootstrap",
       "Material UI",
+      "Next.js",
+      "Tailwind CSS",
     ],
   },
   {
