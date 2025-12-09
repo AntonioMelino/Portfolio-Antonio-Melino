@@ -45,8 +45,8 @@ export function HeroSection() {
             </p>
 
             <p className="text-base md:text-lg text-muted-foreground text-balance mb-8 max-w-xl leading-relaxed">
-              Soy un desarrollador con formación académica y autodidacta, con
-              gran motivación para ingresar al mundo IT.
+              Soy un desarrollador con base académica y enfoque autodidacta,
+              motivado por crecer y aportar en el entorno IT.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-10">
