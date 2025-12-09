@@ -7,7 +7,7 @@ const projects = [
   {
     title: "Gamer Zone App",
     description:
-      "Esta es una tienda en línea especializada en productos gamer, desarrollada con React, Firebase y Material-UI (MUI). En esta plataforma, los usuarios pueden explorar un catálogo de productos, filtrar por categorías, agregar productos al carrito y realizar compras de manera segura. Además, próximamente se integrará un sistema de autenticación con perfiles de usuario.",
+      "Tienda online de productos gamer desarrollada con React, Firebase y MUI. Permite explorar el catálogo, filtrar por categorías, gestionar el carrito y realizar compras. Próximamente incluirá autenticación de usuarios.",
     image: "/ProyectReact.jpeg",
     gif: "/gifProyectReact.gif",
     tags: ["React", "Material-UI", "Firebase"],
@@ -17,7 +17,7 @@ const projects = [
   {
     title: "Verificador de fotos",
     description:
-      "Esta aplicación está diseñada para facilitar la verificación de fotos en auditorías, permitiendo a los usuarios cargar imágenes, identificar desvíos o irregularidades, y gestionar los resultados de manera eficiente. Además, ofrece funcionalidades avanzadas como la conversión de archivos PDF a JPG, filtrado aleatorio de imagenes y la exportación de datos a Excel. Es una herramienta ideal para profesionales que necesitan validar y auditar imágenes de manera rápida y precisa.",
+      "Aplicación para verificar fotos en auditorías: carga de imágenes, detección de desvíos y gestión de resultados. Incluye conversión PDF→JPG, filtrado aleatorio y exportación a Excel. Ideal para validaciones rápidas y precisas.",
     image: "/foto EMA.jpeg",
     gif: "/gif EMA.gif",
     tags: ["HTML", "CSS", "Firebase"],
@@ -27,7 +27,7 @@ const projects = [
   {
     title: "Calculadora",
     description:
-      "Este proyecto consiste en el desarrollo de una calculadora de escritorio creada con C# utilizando el framework .NET y Windows Forms. La aplicación permite realizar operaciones matemáticas básicas como suma, resta, multiplicación y división mediante una interfaz gráfica intuitiva y amigable para el usuario.",
+      "Calculadora de escritorio creada con C# (.NET y Windows Forms) que permite realizar operaciones básicas mediante una interfaz simple e intuitiva.",
     image: "/foto Calculadora.jpeg",
     gif: "/gif Calculadora.gif",
     tags: ["C#", ".NET", "Windows Forms"],

@@ -22,7 +22,7 @@ const experiences = [
     position: "Analista de datos",
     period: "Octubre 2024 - Octubre 2025",
     description:
-      "Desarrollo de soluciones web personalizadas para el sistema interno. Trabajo en equipo con usuarios y personal interno.",
+      "Desarrollo de soluciones web personalizadas para el sistema interno. Trabajo en equipo con usuarios y personal.",
     achievements: [
       "Desarrollo de una aplicación web para la auditoría de fotos, implementando HTML, CSS y JavaScript para la gestión y validación de imágenes.",
       "Recopilación de datos desde bases de datos. ",
