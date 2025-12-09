@@ -163,8 +163,8 @@ export function ContactSection() {
             <Card className="p-6 bg-primary text-primary-foreground">
               <h3 className="font-semibold mb-2">¿Listo para empezar?</h3>
               <p className="text-sm opacity-90 leading-relaxed">
-                Estoy disponible para proyectos freelance y colaboraciones. ¡No
-                dudes en contactarme!
+                Estoy disponible para proyectos freelance y empresas. ¡No dudes
+                en contactarme!
               </p>
             </Card>
           </div>

@@ -1,30 +1,57 @@
 import { Card } from "@/components/ui/card";
+import {
+  Code2,
+  FileJson,
+  FileCode,
+  Atom,
+  Layout,
+  Layers,
+  Coffee,
+  Hash,
+  Box,
+  Flame,
+  Database,
+  GitBranch,
+  Brain,
+  Globe,
+  Server,
+} from "lucide-react";
 
 const skillCategories = [
   {
     title: "Frontend",
     skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React.js",
-      "Bootstrap",
-      "Material UI",
-      "Next.js",
-      "Tailwind CSS",
+      { name: "HTML", icon: <Code2 size={18} /> },
+      { name: "CSS", icon: <FileJson size={18} /> },
+      { name: "JavaScript", icon: <FileCode size={18} /> },
+      { name: "TypeScript", icon: <FileCode size={18} /> },
+      { name: "React.js", icon: <Atom size={18} /> },
+      { name: "Next.js", icon: <Globe size={18} /> }, // 🆕 AGREGADO
+      { name: "Tailwind CSS", icon: <Layers size={18} /> }, // 🆕 AGREGADO
+      { name: "Bootstrap", icon: <Layout size={18} /> },
+      { name: "Material UI", icon: <Layers size={18} /> },
     ],
   },
   {
     title: "Backend",
-    skills: ["Java", "C#", ".NET", "Firebase", "C++"],
+    skills: [
+      { name: "Node.js", icon: <Server size={18} /> },
+      { name: "Java", icon: <Coffee size={18} /> },
+      { name: "C#", icon: <Hash size={18} /> },
+      { name: "C++", icon: <FileCode size={18} /> },
+      { name: ".NET", icon: <Box size={18} /> },
+      { name: "SQL", icon: <Database size={18} /> },
+      { name: "MySQL", icon: <Database size={18} /> }, // 🆕 AGREGADO
+    ],
   },
   {
-    title: "Base de Datos",
-    skills: ["SQL", "MySQL"],
-  },
-  {
-    title: "DevOps & Herramientas",
-    skills: ["GitHub", "Inglés técnico", "IA"],
+    title: "Herramientas & Cloud",
+    skills: [
+      { name: "GitHub", icon: <GitBranch size={18} /> },
+      { name: "Firebase", icon: <Flame size={18} /> },
+      { name: "IA", icon: <Brain size={18} /> },
+      { name: "Inglés técnico", icon: <Globe size={18} /> }, // 🆕 AGREGADO
+    ],
   },
 ];
 
@@ -45,7 +72,7 @@ export function SkillsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category) => (
             <Card
               key={category.title}
@@ -54,13 +81,16 @@ export function SkillsSection() {
               <h3 className="text-xl font-semibold mb-4 text-primary">
                 {category.title}
               </h3>
-              <div className="flex flex-wrap gap-2">
+
+              {/* GRID DE DOS COLUMNAS COMO EN LA FOTO */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {category.skills.map((skill) => (
                   <span
-                    key={skill}
-                    className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm"
+                    key={skill.name}
+                    className="flex items-center gap-2 px-3 py-2 bg-secondary text-secondary-foreground rounded-md text-sm border border-secondary/40"
                   >
-                    {skill}
+                    {skill.icon}
+                    {skill.name}
                   </span>
                 ))}
               </div>
