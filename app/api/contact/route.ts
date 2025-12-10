@@ -1,42 +1,145 @@
-// /app/api/contact/route.ts
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY!);
-
 export async function POST(req: Request) {
+  console.log("=== INICIANDO API CONTACT ===");
+
   try {
+    // 1. Parsear el body
     const body = await req.json();
+    console.log("Body recibido:", body);
+
     const { name, email, message } = body ?? {};
 
-    // Validación
+    // 2. Validación
     if (!name || !email || !message) {
+      console.log("Error: Faltan campos");
       return new Response(
-        JSON.stringify({ error: "Faltan campos requeridos" }),
-        { status: 400 }
+        JSON.stringify({
+          error: "Faltan campos requeridos",
+          details: { name, email, message },
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
       );
     }
 
-    // Enviar email
-    await resend.emails.send({
-      from: "Portfolio <antoniomelino1997@gmail.com>", // <= CAMBIADO
-      to: process.env.EMAIL_TO!, // <= limpio y seguro
-      subject: `Nuevo mensaje desde tu portfolio: ${name}`,
-      html: `
-        <h2>Nuevo mensaje de contacto</h2>
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <hr />
-        <p><strong>Mensaje:</strong></p>
-        <p>${message.replace(/\n/g, "<br/>")}</p>
-      `,
+    console.log("✅ Campos validados correctamente");
+
+    // 3. Verificar variables de entorno
+    console.log("Verificando variables de entorno...");
+    const requiredEnvVars = [
+      "EMAILJS_SERVICE_ID",
+      "EMAILJS_TEMPLATE_ID",
+      "EMAILJS_PUBLIC_KEY",
+      "EMAIL_TO",
+    ];
+
+    const missingVars = requiredEnvVars.filter(
+      (varName) => !process.env[varName]
+    );
+
+    if (missingVars.length > 0) {
+      console.log("❌ Variables faltantes:", missingVars);
+      return new Response(
+        JSON.stringify({
+          error: "Configuración incompleta",
+          missingVariables: missingVars,
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    console.log("✅ Todas las variables de entorno existen");
+
+    // 4. Preparar datos para EmailJS
+    const templateParams = {
+      name,
+      email,
+      message,
+      to_email: process.env.EMAIL_TO,
+      date: new Date().toLocaleString("es-ES"),
+      reply_to: email, // Para que puedas responder directamente
+    };
+
+    // 5. Preparar cuerpo de la petición
+    const requestBody: any = {
+      service_id: process.env.EMAILJS_SERVICE_ID,
+      template_id: process.env.EMAILJS_TEMPLATE_ID,
+      user_id: process.env.EMAILJS_PUBLIC_KEY,
+      template_params: templateParams,
+    };
+
+    // 6. Agregar Private Key si está disponible (recomendado)
+    if (process.env.EMAILJS_PRIVATE_KEY) {
+      requestBody.accessToken = process.env.EMAILJS_PRIVATE_KEY;
+      console.log("✅ Usando Private Key para autenticación");
+    }
+
+    console.log("Enviando a EmailJS...");
+
+    // 7. Hacer la petición a EmailJS
+    const emailjsResponse = await fetch(
+      "https://api.emailjs.com/api/v1.0/email/send",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      }
+    );
+
+    const responseText = await emailjsResponse.text();
+    console.log("📧 Respuesta de EmailJS:", {
+      status: emailjsResponse.status,
+      statusText: emailjsResponse.statusText,
+      body: responseText,
     });
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200 });
-  } catch (error) {
-    console.error("Error al enviar email:", error);
+    if (!emailjsResponse.ok) {
+      // Si es error 403, dar instrucciones específicas
+      if (emailjsResponse.status === 403) {
+        throw new Error(
+          `Error 403: EmailJS bloquea llamadas desde servidor. ` +
+            `Ve a dashboard.emailjs.com/admin → Account → Security → ` +
+            `"Allow requests from non-browser applications" y actívalo.`
+        );
+      }
+      throw new Error(
+        `EmailJS error ${emailjsResponse.status}: ${responseText}`
+      );
+    }
+
+    console.log("✅ Email enviado exitosamente!");
+
     return new Response(
-      JSON.stringify({ error: "Error al enviar el mensaje" }),
-      { status: 500 }
+      JSON.stringify({
+        ok: true,
+        message: "Email enviado correctamente",
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error: any) {
+    console.error("❌ ERROR en API contact:", error.message);
+
+    return new Response(
+      JSON.stringify({
+        error: "Error al enviar el mensaje",
+        details: error.message,
+        solution:
+          "Por favor, habilita 'Allow requests from non-browser applications' en EmailJS",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }
