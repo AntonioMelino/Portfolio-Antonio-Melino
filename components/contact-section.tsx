@@ -16,12 +16,38 @@ export function ContactSection() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar el formulario
-    console.log("Formulario enviado:", formData);
-    alert("¡Gracias por tu mensaje! Te responderé pronto.");
-    setFormData({ name: "", email: "", message: "" });
+    setLoading(true);
+    setSuccess("");
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Error al enviar el mensaje.");
+        return;
+      }
+
+      setSuccess("¡Mensaje enviado correctamente!");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      setError("Hubo un error al enviar el mensaje.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,6 +67,7 @@ export function ContactSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
+          {/* FORMULARIO */}
           <Card className="p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -61,6 +88,7 @@ export function ContactSection() {
                   required
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="email"
@@ -79,6 +107,7 @@ export function ContactSection() {
                   required
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="message"
@@ -97,13 +126,31 @@ export function ContactSection() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full" size="lg">
-                <Send className="h-4 w-4 mr-2" />
-                Enviar Mensaje
+
+              <Button
+                type="submit"
+                className="w-full"
+                size="lg"
+                disabled={loading}
+              >
+                {loading ? (
+                  "Enviando..."
+                ) : (
+                  <>
+                    <Send className="h-4 w-4 mr-2" />
+                    Enviar Mensaje
+                  </>
+                )}
               </Button>
+
+              {success && (
+                <p className="text-green-600 text-center">{success}</p>
+              )}
+              {error && <p className="text-red-600 text-center">{error}</p>}
             </form>
           </Card>
 
+          {/* INFO DE CONTACTO */}
           <div className="space-y-6">
             <Card className="p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-center gap-4">
@@ -130,7 +177,7 @@ export function ContactSection() {
                 <div>
                   <h3 className="font-semibold mb-1">LinkedIn</h3>
                   <a
-                    href=" https://www.linkedin.com/in/antonio-melino-82a885213/"
+                    href="https://www.linkedin.com/in/antonio-melino-82a885213/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
