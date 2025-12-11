@@ -26,8 +26,8 @@ const skillCategories = [
       { name: "JavaScript", icon: <FileCode size={18} /> },
       { name: "TypeScript", icon: <FileCode size={18} /> },
       { name: "React.js", icon: <Atom size={18} /> },
-      { name: "Next.js", icon: <Globe size={18} /> }, // 🆕 AGREGADO
-      { name: "Tailwind CSS", icon: <Layers size={18} /> }, // 🆕 AGREGADO
+      { name: "Next.js", icon: <Globe size={18} /> },
+      { name: "Tailwind CSS", icon: <Layers size={18} /> },
       { name: "Bootstrap", icon: <Layout size={18} /> },
       { name: "Material UI", icon: <Layers size={18} /> },
     ],
@@ -41,7 +41,7 @@ const skillCategories = [
       { name: "C++", icon: <FileCode size={18} /> },
       { name: ".NET", icon: <Box size={18} /> },
       { name: "SQL", icon: <Database size={18} /> },
-      { name: "MySQL", icon: <Database size={18} /> }, // 🆕 AGREGADO
+      { name: "MySQL", icon: <Database size={18} /> },
     ],
   },
   {
@@ -50,7 +50,7 @@ const skillCategories = [
       { name: "GitHub", icon: <GitBranch size={18} /> },
       { name: "Firebase", icon: <Flame size={18} /> },
       { name: "IA", icon: <Brain size={18} /> },
-      { name: "Inglés técnico", icon: <Globe size={18} /> }, // 🆕 AGREGADO
+      { name: "Inglés técnico", icon: <Globe size={18} /> },
     ],
   },
 ];
@@ -82,12 +82,12 @@ export function SkillsSection() {
                 {category.title}
               </h3>
 
-              {/* GRID DE DOS COLUMNAS COMO EN LA FOTO */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {/* MODIFICADO: Grid flexible con wrap */}
+              <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="flex items-center gap-2 px-3 py-2 bg-secondary text-secondary-foreground rounded-md text-sm border border-secondary/40"
+                    className="flex items-center gap-2 px-3 py-2 bg-secondary text-secondary-foreground rounded-md text-sm border border-secondary/40 whitespace-nowrap"
                   >
                     {skill.icon}
                     {skill.name}
