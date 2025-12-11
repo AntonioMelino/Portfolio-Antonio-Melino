@@ -1,12 +1,15 @@
 "use client";
 
 import { GraduationCap, Calendar, Award, BookOpen } from "lucide-react";
+import Image from "next/image";
 
 const educationData = [
   {
     institution: "Universidad Tecnológica Nacional",
     degree: "Tecnicatura Universitaria en Programación",
     period: "2021 - 2025",
+    logo: "/logo UTN.jpg",
+    logoScale: "scale-150",
     description:
       "Formación integral en desarrollo de software, arquitectura de sistemas y gestión de proyectos tecnológicos.",
     achievements: [
@@ -20,8 +23,10 @@ const educationData = [
   },
   {
     institution: "Coderhouse",
-    degree: "Desarrollador Full Stack",
+    degree: "Desarrollador Front-End",
     period: "2022 - 2025",
+    logo: "/logo Coderhouse.jpg",
+    logoScale: "scale-150",
     description:
       "Cursos especializados en tecnologías modernas de desarrollo web y las mejores prácticas de la industria.",
     achievements: [
@@ -84,12 +89,28 @@ export function EducationSection() {
                       }`}
                     />
 
-                    {/* Encabezado */}
-                    <div className="mb-4">
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                          <BookOpen className="h-5 w-5" />
+                    {/* Encabezado con logo */}
+                    <div className="mb-6">
+                      <div className="flex items-start gap-4 mb-4">
+                        {/* Contenedor del logo */}
+                        <div className="relative h-14 w-14 rounded-xl bg-white p-2 border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden">
+                          <div className="relative h-full w-full">
+                            <Image
+                              src={edu.logo}
+                              alt={`Logo de ${edu.institution}`}
+                              fill
+                              className={`object-contain ${
+                                edu.logoScale || "scale-100"
+                              }`}
+                              sizes="56px"
+                              onError={(e) => {
+                                // Fallback si el logo no carga
+                                e.currentTarget.style.display = "none";
+                              }}
+                            />
+                          </div>
                         </div>
+
                         <div className="flex-1">
                           <h3 className="text-xl font-bold mb-1 text-balance group-hover:text-primary transition-colors">
                             {edu.degree}
@@ -108,8 +129,8 @@ export function EducationSection() {
                       </div>
                     </div>
 
-                    {/* Descripción */}
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                    {/* Descripción con línea estética */}
+                    <p className="text-muted-foreground mb-6 leading-relaxed text-sm border-l-3 border-primary pl-4 py-1">
                       {edu.description}
                     </p>
 
