@@ -83,6 +83,12 @@ export function Header() {
                 Experiencia
               </button>
               <button
+                onClick={() => scrollToSection("educacion")}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Educación
+              </button>
+              <button
                 onClick={() => scrollToSection("habilidades")}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -171,6 +177,12 @@ export function Header() {
                   className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
                 >
                   Experiencia
+                </button>
+                <button
+                  onClick={() => scrollToSection("educacion")}
+                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
+                >
+                  Educación
                 </button>
                 <button
                   onClick={() => scrollToSection("habilidades")}
