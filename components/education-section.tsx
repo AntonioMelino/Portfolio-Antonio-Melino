@@ -1,43 +1,36 @@
 "use client";
 
-import { GraduationCap, Calendar, Award } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { GraduationCap, Calendar, Award, BookOpen } from "lucide-react";
 
 const educationData = [
   {
-    institution: "Universidad Tecnológica",
-    degree: "Ingeniería en Sistemas Computacionales",
-    period: "2015 - 2019",
+    institution: "Universidad Tecnológica Nacional",
+    degree: "Tecnicatura Universitaria en Programación",
+    period: "2021 - 2025",
     description:
       "Formación integral en desarrollo de software, arquitectura de sistemas y gestión de proyectos tecnológicos.",
     achievements: [
-      "Graduado con honores - Promedio: 9.2/10",
-      "Proyecto de tesis sobre Machine Learning aplicado",
-      "Certificación en Desarrollo Web Full Stack",
+      "Especialización en desarrollo backend con dominio de lenguajes como C++, C# y Java.",
+      "Experiencia práctica con el framework .NET y gestión de bases de datos relacionales (SQL, MySQL).",
+      "Desarrollo de múltiples proyectos en equipo, fomentando habilidades de colaboración, comunicación y metodologías ágiles.",
+      "Adquisición de inglés técnico para la documentación y comprensión de especificaciones de software.",
+      "Certificado en Desarrollo Web.",
+      "Certificado en C# y .NET.",
     ],
   },
   {
-    institution: "Platzi",
-    degree: "Escuela de Desarrollo Web",
-    period: "2019 - 2020",
+    institution: "Coderhouse",
+    degree: "Desarrollador Full Stack",
+    period: "2022 - 2025",
     description:
-      "Cursos especializados en tecnologías modernas de desarrollo web y mejores prácticas de la industria.",
+      "Cursos especializados en tecnologías modernas de desarrollo web y las mejores prácticas de la industria.",
     achievements: [
-      "Certificación en React y Next.js",
-      "Curso avanzado de Node.js y bases de datos",
-      "Especialización en arquitectura de software",
-    ],
-  },
-  {
-    institution: "FreeCodeCamp",
-    degree: "Full Stack Development",
-    period: "2018 - 2019",
-    description:
-      "Programa intensivo de 1,800+ horas cubriendo frontend, backend, y estructuras de datos.",
-    achievements: [
-      "Certificación en Responsive Web Design",
-      "Certificación en JavaScript Algorithms",
-      "Certificación en Front End Development Libraries",
+      "Enfoque en desarrollo frontend, creando interfaces de usuario dinámicas y responsivas con HTML, CSS y JavaScript.",
+      "Experiencia en el uso de bibliotecas y frameworks modernos como React.js, Bootstrap y Material UI.",
+      "Desarrollo de proyectos profesionales aplicando las mejores prácticas de la industria y estándares web.",
+      "Certificado en Desarrollo Web.",
+      "Certificado en JavaScript.",
+      "Certificado en React JS.",
     ],
   },
 ];
@@ -45,8 +38,11 @@ const educationData = [
 export function EducationSection() {
   return (
     <section id="educacion" className="py-24 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-5xl">
         <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-full mb-4">
+            <GraduationCap className="h-6 w-6 text-primary" />
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-balance mb-4">
             Educación y Formación
           </h2>
@@ -55,54 +51,87 @@ export function EducationSection() {
           </p>
         </div>
 
-        <div className="space-y-6">
-          {educationData.map((edu, index) => (
-            <Card
-              key={index}
-              className="group hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <CardContent className="p-6">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-start gap-3 mb-2">
-                      <div className="mt-1 p-2 rounded-lg bg-primary/10 text-primary">
-                        <GraduationCap className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">
-                          {edu.degree}
-                        </h3>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Award className="h-4 w-4" />
-                          <span className="font-medium">{edu.institution}</span>
+        {/* Timeline container */}
+        <div className="relative">
+          {/* Línea vertical del timeline */}
+          <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/50 to-transparent" />
+
+          <div className="space-y-12">
+            {educationData.map((edu, index) => (
+              <div
+                key={index}
+                className="relative animate-in fade-in slide-in-from-left-8"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                {/* Punto del timeline */}
+                <div className="absolute left-[20px] md:left-1/2 md:-translate-x-1/2 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background shadow-lg z-10" />
+
+                {/* Contenido - alterna izquierda/derecha en desktop */}
+                <div
+                  className={`ml-16 md:ml-0 md:w-[calc(50%-3rem)] ${
+                    index % 2 === 0
+                      ? "md:mr-auto md:pr-12"
+                      : "md:ml-auto md:pl-12"
+                  }`}
+                >
+                  <div className="group relative bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 hover:shadow-xl transition-all duration-300">
+                    {/* Flecha hacia la línea del timeline (solo desktop) */}
+                    <div
+                      className={`hidden md:block absolute top-6 w-4 h-4 rotate-45 border-2 border-border bg-card ${
+                        index % 2 === 0
+                          ? "right-[-10px] border-l-0 border-b-0 group-hover:border-primary/50"
+                          : "left-[-10px] border-r-0 border-t-0 group-hover:border-primary/50"
+                      }`}
+                    />
+
+                    {/* Encabezado */}
+                    <div className="mb-4">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                          <BookOpen className="h-5 w-5" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold mb-1 text-balance group-hover:text-primary transition-colors">
+                            {edu.degree}
+                          </h3>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                            <Award className="h-4 w-4" />
+                            <span className="font-medium">
+                              {edu.institution}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4" />
+                            <span>{edu.period}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span>{edu.period}</span>
+
+                    {/* Descripción */}
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                      {edu.description}
+                    </p>
+
+                    {/* Logros/Certificaciones */}
+                    <div className="space-y-2.5">
+                      {edu.achievements.map((achievement, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 p-2.5 rounded-lg bg-muted/40 hover:bg-muted transition-colors"
+                        >
+                          <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                          <span className="text-sm leading-relaxed">
+                            {achievement}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {edu.description}
-                </p>
-
-                <ul className="space-y-2">
-                  {edu.achievements.map((achievement, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm">
-                      <span className="text-primary mt-1">▸</span>
-                      <span className="text-muted-foreground">
-                        {achievement}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
