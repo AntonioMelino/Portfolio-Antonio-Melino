@@ -9,7 +9,7 @@ const experiences = [
     company: "Maxiconsumo S.A.",
     position: "Operador de sistemas",
     period: "Julio 2018 - Presente",
-    logo: "/Diseño sin título.png",
+    logo: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500752/Logo_Maxiconsumo_zmgkh8.png",
     logoScale: "scale-200",
     description:
       "Encargado de la gestión operativa del sistema interno para el control de mercadería, realizando ajustes de stock, emisión de remitos y análisis de movimientos mediante herramientas administrativas y Excel.",
@@ -24,7 +24,7 @@ const experiences = [
     company: "EMA Servicios",
     position: "Analista de datos",
     period: "Octubre 2024 - Octubre 2025",
-    logo: "/Diseño sin título2.png",
+    logo: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500760/Logo_EMA_ydsmtp.png",
     logoScale: "scale-150",
     description:
       "Desarrollo de soluciones web personalizadas para el sistema interno. Trabajo en equipo con usuarios y personal.",

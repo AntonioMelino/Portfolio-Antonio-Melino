@@ -13,21 +13,9 @@ export const metadata: Metadata = {
   description: "Portfolio profesional de desarrollador full stack",
   generator: "v0.app",
   icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
+    icon: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500411/rocket_zq2lme.svg",
+    apple:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500411/rocket_zq2lme.svg",
   },
 };
 

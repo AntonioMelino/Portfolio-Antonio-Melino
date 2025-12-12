@@ -8,7 +8,7 @@ const educationData = [
     institution: "Universidad Tecnológica Nacional",
     degree: "Tecnicatura Universitaria en Programación",
     period: "2021 - 2025",
-    logo: "/logo UTN.jpg",
+    logo: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500652/Logo_UTN_n1pri1.jpg",
     logoScale: "scale-150",
     description:
       "Formación integral en desarrollo de software, arquitectura de sistemas y gestión de proyectos tecnológicos.",
@@ -25,7 +25,7 @@ const educationData = [
     institution: "Coderhouse",
     degree: "Desarrollador Front-End",
     period: "2022 - 2025",
-    logo: "/logo Coderhouse.jpg",
+    logo: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500707/Logo_Coderhouse_iya3mi.jpg",
     logoScale: "scale-150",
     description:
       "Cursos especializados en tecnologías modernas de desarrollo web y las mejores prácticas de la industria.",
