@@ -71,10 +71,10 @@ export function Header() {
                 Inicio
               </button>
               <button
-                onClick={() => scrollToSection("proyectos")}
+                onClick={() => scrollToSection("sobre-mi")}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                Proyectos
+                Sobre mí
               </button>
               <button
                 onClick={() => scrollToSection("experiencia")}
@@ -93,6 +93,12 @@ export function Header() {
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 Habilidades
+              </button>
+              <button
+                onClick={() => scrollToSection("proyectos")}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Proyectos
               </button>
               <button
                 onClick={() => scrollToSection("contacto")}
@@ -167,10 +173,10 @@ export function Header() {
                   Inicio
                 </button>
                 <button
-                  onClick={() => scrollToSection("proyectos")}
+                  onClick={() => scrollToSection("sobre-mi")}
                   className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
                 >
-                  Proyectos
+                  Sobre mí
                 </button>
                 <button
                   onClick={() => scrollToSection("experiencia")}
@@ -189,6 +195,12 @@ export function Header() {
                   className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
                 >
                   Habilidades
+                </button>
+                <button
+                  onClick={() => scrollToSection("proyectos")}
+                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
+                >
+                  Proyectos
                 </button>
                 <button
                   onClick={() => scrollToSection("contacto")}
