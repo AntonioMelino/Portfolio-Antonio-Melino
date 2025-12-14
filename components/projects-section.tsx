@@ -7,9 +7,10 @@ const projects = [
   {
     title: "Gamer Zone App",
     description:
-      "Tienda online de productos gamer desarrollada con React, Firebase y MUI. Permite explorar el catálogo, filtrar por categorías, gestionar el carrito y realizar compras. Próximamente incluirá autenticación de usuarios.",
-    image: "/ProyectReact.jpeg",
-    gif: "/gifProyectReact.gif",
+      "Tienda online de productos gamer desarrollada con React, Firebase y MUI. Permite explorar el catálogo, filtrar por categorías, gestionar el carrito y realizar compras. También la autenticación de usuarios.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
+    gif: "/GamerZoneApp-gif.gif",
     tags: ["React", "Material-UI", "Firebase"],
     demo: "https://gamer-zone-app.vercel.app/",
     github: "https://github.com/AntonioMelino/GamerZoneApp",
@@ -69,18 +70,27 @@ export function ProjectsSection() {
               className="overflow-hidden group hover:shadow-2xl transition-all duration-300"
             >
               <div className="relative h-64 overflow-hidden bg-muted">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-opacity duration-300 group-hover:opacity-0"
-                />
-                <Image
-                  src={project.gif || "/placeholder.svg"}
-                  alt={`${project.title} animación`}
-                  fill
-                  className="object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-contain transition-opacity duration-300 group-hover:opacity-0 p-2"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <Image
+                      src={project.gif || "/placeholder.svg"}
+                      alt={`${project.title} animación`}
+                      fill
+                      className="object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-2"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
+
+                {/* Overlay para mejorar contraste de las imágenes */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
