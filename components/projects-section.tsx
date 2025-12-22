@@ -10,7 +10,7 @@ const projects = [
       "Tienda online de productos gamer desarrollada con React, Firebase y MUI. Permite explorar el catálogo, filtrar por categorías, gestionar el carrito y realizar compras. También la autenticación de usuarios.",
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
-    gif: "/GamerZoneApp-gif.gif",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442488/GamerZoneApp-gif_eszq7w.gif",
     tags: ["React", "Material-UI", "Firebase"],
     demo: "https://gamer-zone-app.vercel.app/",
     github: "https://github.com/AntonioMelino/GamerZoneApp",
@@ -19,8 +19,9 @@ const projects = [
     title: "Verificador de fotos",
     description:
       "Aplicación para verificar fotos en auditorías: carga de imágenes, detección de desvíos y gestión de resultados. Incluye conversión PDF→JPG, filtrado aleatorio y exportación a Excel. Ideal para validaciones rápidas y precisas.",
-    image: "/foto EMA.jpeg",
-    gif: "/gif EMA.gif",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442779/EMA-gif_eqz9vg.gif",
     tags: ["HTML", "CSS", "Firebase"],
     demo: "https://verificador-de-fotos.web.app/",
     github: "https://github.com/AntonioMelino/AplicacionAuditoria",
@@ -29,8 +30,9 @@ const projects = [
     title: "Calculadora",
     description:
       "Calculadora de escritorio creada con C# (.NET y Windows Forms) que permite realizar operaciones básicas mediante una interfaz simple e intuitiva.",
-    image: "/foto Calculadora.jpeg",
-    gif: "/gif Calculadora.gif",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442662/Calculadora-foto_qeao2n.jpg",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442770/Calculadora-gif_yvudqw.gif",
     tags: ["C#", ".NET", "Windows Forms"],
     demo: "#",
     github: "https://github.com/AntonioMelino/Calculadora",
