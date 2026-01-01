@@ -11,9 +11,27 @@ const projects = [
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442488/GamerZoneApp-gif_eszq7w.gif",
-    tags: ["React", "Material-UI", "Firebase"],
+    tags: ["React", "Material-UI", "Firebase", "JavaScript", "Vercel"],
     demo: "https://gamer-zone-app.vercel.app/",
     github: "https://github.com/AntonioMelino/GamerZoneApp",
+  },
+  {
+    title: "Techos Nass",
+    description:
+      "Techos Nass es una página web moderna y responsive desarrollada para un negocio especializado en servicios de techos. La plataforma muestra información profesional del negocio, incluyendo ubicación exacta con Google Maps, opiniones reales de clientes y un sistema de contacto directo vía WhatsApp.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Google Maps API",
+      "Responsive Design",
+      "Vercel",
+    ],
+    demo: "https://techos-nass.vercel.app/",
+    github: "https://github.com/AntonioMelino/TechosNass",
   },
   {
     title: "Verificador de fotos",
@@ -37,16 +55,6 @@ const projects = [
     demo: "#",
     github: "https://github.com/AntonioMelino/Calculadora",
   },
-  // {
-  //   title: "Red Social para Desarrolladores",
-  //   description:
-  //     "Plataforma social para compartir código, proyectos y conectar con otros desarrolladores.",
-  //   image: "/developer-social-network-feed.jpg",
-  //   gif: "/social-feed-scroll-animation.jpg",
-  //   tags: ["React", "Express", "GraphQL", "PostgreSQL"],
-  //   demo: "#",
-  //   github: "#",
-  // },
 ];
 
 export function ProjectsSection() {
