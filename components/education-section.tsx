@@ -5,6 +5,21 @@ import Image from "next/image";
 
 const educationData = [
   {
+    institution: "Universidad Nacional de San Martín",
+    degree: "Estudio de Idiomas - Inglés e Italiano",
+    period: "2026 - Actualidad",
+    logo: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1775431709/Logo_UNSAM_ed4n0n.png",
+    logoScale: "scale-150",
+    description:
+      "Formación en idiomas extranjeros con enfoque comunicativo y desarrollo de habilidades lingüísticas.",
+    achievements: [
+      "Inglés - Nivel actual A1 (en curso).",
+      "Italiano - Nivel actual A1 (en curso).",
+      "Desarrollo de competencias en comprensión auditiva, lectura, expresión oral y escrita.",
+      "Estudio de estructuras gramaticales y vocabulario básico en ambos idiomas.",
+    ],
+  },
+  {
     institution: "Universidad Tecnológica Nacional",
     degree: "Tecnicatura Universitaria en Programación",
     period: "2021 - 2025",
