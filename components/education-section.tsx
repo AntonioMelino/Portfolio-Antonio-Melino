@@ -5,6 +5,23 @@ import Image from "next/image";
 
 const educationData = [
   {
+    institution: "Microsoft",
+    degree: "Certificado Profesional Full Stack Developer",
+    period: "2026 - Actualidad",
+    logo: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1777340332/Logo_Microsoft_glrtwp.png",
+    logoScale: "scale-150",
+    description:
+      "Certificado profesional orientado al desarrollo full stack con el ecosistema .NET, enfocado en buenas prácticas, escalabilidad y entornos productivos.",
+    achievements: [
+      "Diseño e implementación de soluciones escalables con .NET Core, garantizando rendimiento, seguridad y mantenibilidad.",
+      "Aplicación de principios de POO para construir arquitecturas modulares en C# con ASP.NET.",
+      "Gestión de bases de datos relacionales con SQL Server y optimización de consultas.",
+      "Implementación de flujos CI/CD con Azure DevOps para automatizar despliegues y gestionar el ciclo de desarrollo.",
+      "Contenerización de aplicaciones con Docker y despliegue en Azure.",
+      "Control de versiones con Git y GitHub en flujos de trabajo colaborativos.",
+    ],
+  },
+  {
     institution: "Universidad Nacional de San Martín",
     degree: "Estudio de Idiomas - Inglés e Italiano",
     period: "2026 - Actualidad",
