@@ -29,10 +29,10 @@ const experiences = [
     description:
       "Desarrollo de soluciones web personalizadas para el sistema interno. Trabajo en equipo con usuarios y personal.",
     achievements: [
-      "Desarrollo de una aplicación web para la auditoría de fotos, implementando HTML, CSS y JavaScript para la gestión y validación de imágenes.",
-      "Recopilación de datos desde bases de datos.",
-      "Análisis y organización de datos en Excel.",
-      "Generación de reportes analíticos.",
+      "Diseño y desarrollo completo de una aplicación web para auditoría de imágenes, implementando HTML, CSS y JavaScript — solución adoptada para la validación y gestión de fotos a nivel operativo.",
+      "Recopilación y procesamiento de datos desde bases de datos SQL y archivos Excel, asegurando la calidad e integridad de la información.",
+      "Generación de reportes analíticos para soporte en la toma de decisiones.",
+      "Mapeo geográfico de direcciones de usuarios para análisis de distribución.",
     ],
   },
 ];
