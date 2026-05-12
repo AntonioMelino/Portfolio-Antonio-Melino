@@ -1,6 +1,7 @@
 "use client";
 
-import { GraduationCap, Calendar, Award, BookOpen } from "lucide-react";
+import { GraduationCap, Calendar } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import Image from "next/image";
 
 const educationData = [
@@ -74,117 +75,78 @@ const educationData = [
 
 export function EducationSection() {
   return (
-    <section id="educacion" className="py-24 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-full mb-4">
-            <GraduationCap className="h-6 w-6 text-primary" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-balance mb-4">
-            Educación y Formación
+    <section id="educacion" className="py-20 px-4 bg-muted/30">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-12">
+          <p className="text-sm text-primary font-semibold mb-2 uppercase tracking-wider">
+            Educación & Formación
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-balance mb-4">
+            Trayectoria Académica
           </h2>
-          <p className="text-muted-foreground text-balance max-w-2xl mx-auto">
-            Mi trayectoria académica y certificaciones profesionales
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Mi recorrido académico y certificaciones profesionales
           </p>
         </div>
 
-        {/* Timeline container */}
-        <div className="relative">
-          {/* Línea vertical del timeline */}
-          <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/50 to-transparent" />
-
-          <div className="space-y-12">
-            {educationData.map((edu, index) => (
-              <div
-                key={index}
-                className="relative animate-in fade-in slide-in-from-left-8"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {/* Punto del timeline */}
-                <div className="absolute left-[20px] md:left-1/2 md:-translate-x-1/2 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background shadow-lg z-10" />
-
-                {/* Contenido - alterna izquierda/derecha en desktop */}
-                <div
-                  className={`ml-16 md:ml-0 md:w-[calc(50%-3rem)] ${
-                    index % 2 === 0
-                      ? "md:mr-auto md:pr-12"
-                      : "md:ml-auto md:pl-12"
-                  }`}
-                >
-                  <div className="group relative bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 hover:shadow-xl transition-all duration-300">
-                    {/* Flecha hacia la línea del timeline (solo desktop) */}
-                    <div
-                      className={`hidden md:block absolute top-6 w-4 h-4 rotate-45 border-2 border-border bg-card ${
-                        index % 2 === 0
-                          ? "right-[-10px] border-l-0 border-b-0 group-hover:border-primary/50"
-                          : "left-[-10px] border-r-0 border-t-0 group-hover:border-primary/50"
-                      }`}
+        <div className="grid md:grid-cols-2 gap-6">
+          {educationData.map((edu, index) => (
+            <Card
+              key={index}
+              className="group p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] border-2 border-transparent hover:border-primary/20 animate-in fade-in slide-in-from-bottom-4"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              {/* Header: logo + institución + icono */}
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12 rounded-lg bg-white p-1.5 border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden">
+                    <Image
+                      src={edu.logo}
+                      alt={`Logo de ${edu.institution}`}
+                      fill
+                      className={`object-contain ${edu.logoScale || "scale-100"}`}
+                      sizes="48px"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
-
-                    {/* Encabezado con logo */}
-                    <div className="mb-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        {/* Contenedor del logo */}
-                        <div className="relative h-14 w-14 rounded-xl bg-white p-2 border border-gray-200 shadow-sm flex-shrink-0 overflow-hidden">
-                          <div className="relative h-full w-full">
-                            <Image
-                              src={edu.logo}
-                              alt={`Logo de ${edu.institution}`}
-                              fill
-                              className={`object-contain ${
-                                edu.logoScale || "scale-100"
-                              }`}
-                              sizes="56px"
-                              onError={(e) => {
-                                // Fallback si el logo no carga
-                                e.currentTarget.style.display = "none";
-                              }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold mb-1 text-balance group-hover:text-primary transition-colors">
-                            {edu.degree}
-                          </h3>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                            <Award className="h-4 w-4" />
-                            <span className="font-medium">
-                              {edu.institution}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Calendar className="h-4 w-4" />
-                            <span>{edu.period}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Descripción con línea estética */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed text-sm border-l-3 border-primary pl-4 py-1">
-                      {edu.description}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-primary leading-tight">
+                      {edu.institution}
                     </p>
-
-                    {/* Logros/Certificaciones */}
-                    <div className="space-y-2.5">
-                      {edu.achievements.map((achievement, i) => (
-                        <div
-                          key={i}
-                          className="flex items-start gap-3 p-2.5 rounded-lg bg-muted/40 hover:bg-muted transition-colors"
-                        >
-                          <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                          <span className="text-sm leading-relaxed">
-                            {achievement}
-                          </span>
-                        </div>
-                      ))}
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1">
+                      <Calendar className="h-3 w-3" />
+                      <span>{edu.period}</span>
                     </div>
                   </div>
                 </div>
+                <div className="p-2 bg-primary/10 rounded-xl flex-shrink-0">
+                  <GraduationCap className="h-5 w-5 text-primary" />
+                </div>
               </div>
-            ))}
-          </div>
+
+              {/* Título del grado */}
+              <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors leading-snug">
+                {edu.degree}
+              </h3>
+
+              {/* Descripción */}
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed border-l-3 border-primary pl-4 py-1">
+                {edu.description}
+              </p>
+
+              {/* Logros */}
+              <ul className="space-y-2">
+                {edu.achievements.map((achievement, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm">
+                    <span className="text-primary mt-0.5 flex-shrink-0">▸</span>
+                    <span className="text-muted-foreground">{achievement}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
