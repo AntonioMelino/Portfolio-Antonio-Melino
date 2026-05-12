@@ -133,7 +133,7 @@ export function HeroSection() {
             <div className="relative">
               <div className="aspect-square max-w-lg mx-auto relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765500925/Foto_CV_-_Antonio_Melino_-_copia_rrr5zc.jpg"
+                  src="https://res.cloudinary.com/dhwsxp2c8/image/upload/v1778549663/Foto_CV-Antonio-Melino_lulu5q.jpg"
                   alt="Antonio Melino - Desarrollador Full Stack"
                   width={600}
                   height={600}
