@@ -1,160 +1,122 @@
-import { Card } from "@/components/ui/card";
-import {
-  Code2,
-  FileJson,
-  FileCode,
-  Atom,
-  Layout,
-  Layers,
-  Coffee,
-  Hash,
-  Box,
-  Flame,
-  Database,
-  GitBranch,
-  Brain,
-  Globe,
-  Server,
-  Cloud,
-  Shield,
-  Users,
-  Sparkles,
-  Code,
-  GitMerge,
-  Container,
-} from "lucide-react";
+import { Globe } from "lucide-react";
 
 const skillCategories = [
   {
+    key: "frontend",
     title: "Frontend",
     skills: [
-      { name: "React", icon: <Atom size={18} /> },
-      { name: "Next.js", icon: <Globe size={18} /> },
-      { name: "JavaScript (ES6+)", icon: <FileCode size={18} /> },
-      { name: "TypeScript", icon: <FileCode size={18} /> },
-      { name: "HTML5", icon: <Code2 size={18} /> },
-      { name: "CSS3", icon: <FileJson size={18} /> },
-      { name: "Tailwind CSS", icon: <Layers size={18} /> },
-      { name: "Bootstrap", icon: <Layout size={18} /> },
-      { name: "Material UI", icon: <Layers size={18} /> },
-      { name: "Responsive Design", icon: <Layout size={18} /> },
+      "React", "Next.js", "JavaScript (ES6+)", "TypeScript",
+      "HTML5", "CSS3", "Tailwind CSS", "Bootstrap", "Material UI", "Responsive Design",
     ],
   },
   {
+    key: "backend",
     title: "Backend",
     skills: [
-      { name: "C#", icon: <Hash size={18} /> },
-      { name: ".NET", icon: <Box size={18} /> },
-      { name: "Java", icon: <Coffee size={18} /> },
-      { name: "C++", icon: <FileCode size={18} /> },
-      { name: "Node.js", icon: <Server size={18} /> },
-      { name: "REST APIs / RESTful", icon: <Code size={18} /> },
-      { name: "JWT / Autenticación", icon: <Shield size={18} /> },
+      "C#", ".NET", "Java", "C++", "Node.js", "REST APIs / RESTful", "JWT / Autenticación",
     ],
   },
   {
+    key: "database",
     title: "Base de Datos",
     skills: [
-      { name: "Firebase (Firestore)", icon: <Flame size={18} /> },
-      { name: "SQL", icon: <Database size={18} /> },
-      { name: "MySQL", icon: <Database size={18} /> },
-      { name: "Entity Framework (ORM)", icon: <Box size={18} /> },
+      "Firebase (Firestore)", "SQL", "MySQL", "Entity Framework (ORM)",
     ],
   },
   {
+    key: "devops",
     title: "DevOps & Cloud",
     skills: [
-      { name: "Git", icon: <GitBranch size={18} /> },
-      { name: "GitHub", icon: <GitMerge size={18} /> },
-      { name: "Vercel", icon: <Cloud size={18} /> },
-      { name: "Docker", icon: <Container size={18} /> },
-      { name: "AWS", icon: <Cloud size={18} /> },
+      "Git", "GitHub", "Vercel", "Docker", "AWS",
     ],
   },
   {
+    key: "ai",
     title: "IA & Dev Tools",
     skills: [
-      { name: "Claude Code", icon: <Brain size={18} /> },
-      { name: "DeepSeek", icon: <Sparkles size={18} /> },
-      { name: "Gemini", icon: <Brain size={18} /> },
-      { name: "GitHub Copilot", icon: <Code size={18} /> },
+      "Claude Code", "DeepSeek", "Gemini", "GitHub Copilot",
     ],
   },
   {
-    title: "Metodologías & Soft Skills",
+    key: "soft",
+    title: "Metodologías",
     skills: [
-      { name: "Agile", icon: <Users size={18} /> },
-      { name: "Scrum", icon: <Users size={18} /> },
-      { name: "Trabajo colaborativo", icon: <Users size={18} /> },
-      { name: "Resolución de problemas", icon: <Brain size={18} /> },
+      "Agile", "Scrum", "Trabajo colaborativo", "Resolución de problemas",
     ],
   },
 ];
 
 export function SkillsSection() {
   return (
-    <section id="habilidades" className="py-20 px-4">
+    <section id="habilidades" className="py-24 px-6 scroll-mt-20">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12">
-          <p className="text-sm text-primary font-semibold mb-2 uppercase tracking-wider">
-            Habilidades Técnicas
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-balance mb-4">
+
+        {/* Header */}
+        <div className="mb-14">
+          <p className="font-mono text-xs text-primary/60 mb-3">// 05. skills.config.ts</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Stack Tecnológico
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Tecnologías, herramientas y metodologías que utilizo para crear
-            soluciones robustas y escalables
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            Tecnologías y herramientas que utilizo para crear soluciones robustas y escalables
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 rounded-full">
-            <Globe size={16} />
-            <span className="text-sm font-medium">
-              🇪🇸 Español nativo | 🇬🇧 Inglés técnico
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 border border-border rounded-full bg-secondary/50">
+            <Globe size={13} className="text-primary" />
+            <span className="font-mono text-xs text-muted-foreground">
+              🇪🇸 Español nativo &nbsp;|&nbsp; 🇬🇧 Inglés técnico
             </span>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Skills grid — code block style */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillCategories.map((category) => (
-            <Card
-              key={category.title}
-              className="p-6 hover:shadow-lg transition-all hover:border-primary/20"
+            <div
+              key={category.key}
+              className="border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 overflow-hidden"
             >
-              <h3 className="text-xl font-semibold mb-4 text-primary">
-                {category.title}
-              </h3>
-
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill.name}
-                    className="flex items-center gap-2 px-3 py-2 bg-secondary text-secondary-foreground rounded-md text-sm border border-secondary/40 whitespace-nowrap hover:bg-secondary/80 transition-colors cursor-default"
-                  >
-                    {skill.icon}
-                    {skill.name}
-                  </span>
-                ))}
+              {/* Card header */}
+              <div className="px-5 py-4 border-b border-border bg-secondary/40">
+                <div className="font-mono text-sm">
+                  <span className="text-primary/70">const </span>
+                  <span className="text-foreground font-semibold">{category.key}</span>
+                  <span className="text-muted-foreground"> = [</span>
+                </div>
               </div>
-            </Card>
+
+              {/* Skills */}
+              <div className="px-5 py-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="font-mono text-xs px-2 py-1 border border-primary/20 text-primary/80 bg-primary/5 rounded hover:border-primary/50 hover:text-primary hover:bg-primary/10 transition-all duration-150 cursor-default"
+                    >
+                      &quot;{skill}&quot;
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Closing bracket */}
+              <div className="px-5 pb-4">
+                <span className="font-mono text-sm text-muted-foreground">]</span>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Badge adicional de metodologías ágiles */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex flex-wrap justify-center gap-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">
-              <Sparkles size={14} />
-              CI/CD
+        {/* Extra badges */}
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {["CI/CD", "Seguridad en APIs", "Code Review", "Clean Code"].map((badge) => (
+            <span
+              key={badge}
+              className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-full font-mono text-xs text-muted-foreground hover:border-primary/40 hover:text-primary transition-colors"
+            >
+              <span className="text-primary">//</span>
+              {badge}
             </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">
-              <Shield size={14} />
-              Seguridad en APIs
-            </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">
-              <Users size={14} />
-              Code Review
-            </span>
-          </div>
+          ))}
         </div>
       </div>
     </section>

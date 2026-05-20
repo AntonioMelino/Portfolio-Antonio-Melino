@@ -2,8 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X, Terminal } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
+
+const navItems = [
+  { id: "hero",        label: "inicio",      num: "01" },
+  { id: "sobre-mi",   label: "sobre_mi",    num: "02" },
+  { id: "experiencia", label: "experiencia", num: "03" },
+  { id: "educacion",  label: "educacion",   num: "04" },
+  { id: "habilidades", label: "skills",      num: "05" },
+  { id: "proyectos",  label: "proyectos",   num: "06" },
+  { id: "contacto",   label: "contacto",    num: "07" },
+];
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -11,24 +21,14 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevenir scroll del body cuando el menú móvil está abierto
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
+    return () => { document.body.style.overflow = "unset"; };
   }, [isMobileMenuOpen]);
 
   const scrollToSection = (id: string) => {
@@ -44,108 +44,83 @@ export function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-background/80 backdrop-blur-md border-b border-border"
+            ? "bg-background/90 backdrop-blur-md border-b border-border"
             : "bg-transparent"
         }`}
       >
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
+            {/* Logo */}
             <button
               onClick={() => scrollToSection("hero")}
-              className="flex items-center gap-2 group"
+              className="flex items-center gap-0 group"
+              aria-label="Ir al inicio"
             >
-              <div className="bg-primary rounded-lg p-2 group-hover:scale-110 transition-transform">
-                <Terminal className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-lg font-bold text-foreground">
-                Antonio Melino
+              <span className="font-mono text-sm">
+                <span className="text-muted-foreground group-hover:text-foreground transition-colors">antonio</span>
+                <span className="text-primary">@dev</span>
+                <span className="text-muted-foreground">:~</span>
+                <span className="text-foreground">$</span>
+                <span className="text-primary cursor-blink ml-0.5">▌</span>
               </span>
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <button
-                onClick={() => scrollToSection("hero")}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-              >
-                Inicio
-              </button>
-              <button
-                onClick={() => scrollToSection("sobre-mi")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Sobre mí
-              </button>
-              <button
-                onClick={() => scrollToSection("experiencia")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Experiencia
-              </button>
-              <button
-                onClick={() => scrollToSection("educacion")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Educación
-              </button>
-              <button
-                onClick={() => scrollToSection("habilidades")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Habilidades
-              </button>
-              <button
-                onClick={() => scrollToSection("proyectos")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Proyectos
-              </button>
-              <button
-                onClick={() => scrollToSection("contacto")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Contacto
-              </button>
+            <div className="hidden md:flex items-center gap-6">
+              {navItems.map(({ id, label, num }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className="group flex items-center gap-1 text-sm transition-colors hover:text-primary text-muted-foreground"
+                >
+                  <span className="font-mono text-xs text-primary/50 group-hover:text-primary/90 transition-colors">
+                    {num}.
+                  </span>
+                  <span className="font-mono">{label}</span>
+                </button>
+              ))}
+
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="rounded-full"
+                className="rounded-md border border-border hover:border-primary/50 hover:text-primary ml-2"
                 aria-label="Cambiar tema"
               >
                 {theme === "light" ? (
-                  <Moon className="h-5 w-5" />
+                  <Moon className="h-4 w-4" />
                 ) : (
-                  <Sun className="h-5 w-5" />
+                  <Sun className="h-4 w-4" />
                 )}
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile controls */}
             <div className="flex md:hidden items-center gap-2">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="rounded-full"
+                className="rounded-md border border-border hover:border-primary/50"
                 aria-label="Cambiar tema"
               >
                 {theme === "light" ? (
-                  <Moon className="h-5 w-5" />
+                  <Moon className="h-4 w-4" />
                 ) : (
-                  <Sun className="h-5 w-5" />
+                  <Sun className="h-4 w-4" />
                 )}
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="rounded-md border border-border hover:border-primary/50"
                 aria-label="Menú"
               >
                 {isMobileMenuOpen ? (
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4" />
                 ) : (
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-4 w-4" />
                 )}
               </Button>
             </div>
@@ -153,61 +128,30 @@ export function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu Overlay y Contenido */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <>
-          {/* Overlay para cerrar al tocar fuera */}
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-
-          {/* Menú móvil */}
-          <div className="fixed top-16 left-0 right-0 bg-background border-b border-border shadow-lg z-50 md:hidden animate-in slide-in-from-top-2">
-            <div className="container mx-auto px-6 py-4">
-              <div className="flex flex-col space-y-2">
-                <button
-                  onClick={() => scrollToSection("hero")}
-                  className="text-left text-base font-medium text-foreground hover:text-primary transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Inicio
-                </button>
-                <button
-                  onClick={() => scrollToSection("sobre-mi")}
-                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Sobre mí
-                </button>
-                <button
-                  onClick={() => scrollToSection("experiencia")}
-                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Experiencia
-                </button>
-                <button
-                  onClick={() => scrollToSection("educacion")}
-                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Educación
-                </button>
-                <button
-                  onClick={() => scrollToSection("habilidades")}
-                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Habilidades
-                </button>
-                <button
-                  onClick={() => scrollToSection("proyectos")}
-                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Proyectos
-                </button>
-                <button
-                  onClick={() => scrollToSection("contacto")}
-                  className="text-left text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-3 px-4 rounded-lg hover:bg-accent/50"
-                >
-                  Contacto
-                </button>
+          <div className="fixed top-16 left-0 right-0 bg-background border-b border-border z-50 md:hidden animate-in slide-in-from-top-2">
+            <div className="container mx-auto px-6 py-6">
+              <div className="flex flex-col gap-1">
+                {navItems.map(({ id, label, num }) => (
+                  <button
+                    key={id}
+                    onClick={() => scrollToSection(id)}
+                    className="flex items-center gap-3 text-left py-3 px-4 rounded-md hover:bg-secondary transition-colors group"
+                  >
+                    <span className="font-mono text-xs text-primary/60 group-hover:text-primary transition-colors w-6">
+                      {num}.
+                    </span>
+                    <span className="font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                      {label}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           </div>

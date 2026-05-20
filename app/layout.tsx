@@ -1,12 +1,16 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Portfolio | Antonio Melino",
@@ -26,8 +30,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning className="smooth-scroll">
-      <body className={`font-sans antialiased`}>
-        <ThemeProvider defaultTheme="light">{children}</ThemeProvider>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
         <Analytics />
       </body>
     </html>
