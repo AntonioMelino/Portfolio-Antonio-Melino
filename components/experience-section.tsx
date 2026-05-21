@@ -69,13 +69,13 @@ export function ExperienceSection() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
                     <div className="flex items-center gap-4">
                       {/* Logo */}
-                      <div className="relative h-12 w-12 rounded-lg bg-white p-1.5 border border-border flex-shrink-0 overflow-hidden">
+                      <div className="relative h-16 w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden">
                         <Image
                           src={exp.logo}
                           alt={`Logo ${exp.company}`}
                           fill
-                          className={`object-contain ${exp.logoScale}`}
-                          sizes="48px"
+                          className="object-contain"
+                          sizes="64px"
                           onError={(e) => { e.currentTarget.style.display = "none"; }}
                         />
                       </div>

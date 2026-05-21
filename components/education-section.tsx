@@ -95,13 +95,13 @@ export function EducationSection() {
               {/* Package-style header */}
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="relative h-11 w-11 rounded-lg bg-white p-1.5 border border-border flex-shrink-0 overflow-hidden">
+                  <div className="relative h-16 w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden">
                     <Image
                       src={edu.logo}
                       alt={`Logo ${edu.institution}`}
                       fill
-                      className={`object-contain ${edu.logoScale}`}
-                      sizes="44px"
+                      className="object-contain"
+                      sizes="64px"
                       onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                   </div>
