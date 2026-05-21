@@ -27,7 +27,7 @@ const roles = [
   "Full Stack Developer",
   "React & Next.js Dev",
   ".NET & C# Dev",
-  "TypeScript Enthusiast",
+  "APIs RESTful & JWT",
 ];
 
 export function HeroSection() {
@@ -76,18 +76,17 @@ export function HeroSection() {
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-
           {/* Left — Text content */}
           <div className="space-y-6 animate-fade-up">
             {/* File label */}
-            <p className="font-mono text-xs text-primary/60">
-              // hero.tsx
-            </p>
+            <p className="font-mono text-xs text-primary/60">// hero.tsx</p>
 
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 rounded-full bg-primary/5">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="font-mono text-xs text-primary">disponible para nuevos proyectos</span>
+              <span className="font-mono text-xs text-primary">
+                disponible para nuevos proyectos
+              </span>
             </div>
 
             {/* Name */}
@@ -102,11 +101,15 @@ export function HeroSection() {
 
             {/* Typing role */}
             <div className="flex items-center gap-2 h-9">
-              <span className="font-mono text-primary/50 text-sm select-none">$</span>
+              <span className="font-mono text-primary/50 text-sm select-none">
+                $
+              </span>
               <span className="font-mono text-xl md:text-2xl font-semibold text-foreground">
                 {displayText}
               </span>
-              <span className="font-mono text-primary text-2xl cursor-blink leading-none">▌</span>
+              <span className="font-mono text-primary text-2xl cursor-blink leading-none">
+                ▌
+              </span>
             </div>
 
             {/* Description */}
@@ -176,7 +179,10 @@ export function HeroSection() {
           </div>
 
           {/* Right — Photo with editor frame */}
-          <div className="animate-fade-up" style={{ animationDelay: "200ms", opacity: 0 }}>
+          <div
+            className="animate-fade-up"
+            style={{ animationDelay: "200ms", opacity: 0 }}
+          >
             <div className="relative max-w-md mx-auto">
               {/* Glow behind */}
               <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl pointer-events-none" />
@@ -207,9 +213,15 @@ export function HeroSection() {
                     priority
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6">
-                    <p className="font-mono text-xs text-primary/70 mb-1">// developer.info</p>
-                    <h3 className="text-white text-xl font-bold">Antonio Melino</h3>
-                    <p className="font-mono text-white/60 text-xs mt-0.5">Full Stack Developer</p>
+                    <p className="font-mono text-xs text-primary/70 mb-1">
+                      // developer.info
+                    </p>
+                    <h3 className="text-white text-xl font-bold">
+                      Antonio Melino
+                    </h3>
+                    <p className="font-mono text-white/60 text-xs mt-0.5">
+                      Full Stack Developer
+                    </p>
                   </div>
                 </div>
 
@@ -217,9 +229,13 @@ export function HeroSection() {
                 <div className="flex items-center justify-between px-4 py-2 bg-secondary border-t border-border">
                   <div className="flex items-center gap-3">
                     <span className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="font-mono text-xs text-muted-foreground">TypeScript</span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      TypeScript
+                    </span>
                   </div>
-                  <span className="font-mono text-xs text-muted-foreground">UTF-8</span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    UTF-8
+                  </span>
                 </div>
               </div>
             </div>
@@ -228,7 +244,9 @@ export function HeroSection() {
 
         {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <span className="font-mono text-xs text-muted-foreground">scroll</span>
+          <span className="font-mono text-xs text-muted-foreground">
+            scroll
+          </span>
           <div className="w-px h-8 bg-gradient-to-b from-primary to-transparent" />
         </div>
       </div>
