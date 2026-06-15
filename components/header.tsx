@@ -7,11 +7,11 @@ import { useTheme } from "@/components/theme-provider";
 
 const navItems = [
   { id: "hero",        label: "inicio",      num: "01" },
-  { id: "sobre-mi",   label: "sobre_mi",    num: "02" },
-  { id: "experiencia", label: "experiencia", num: "03" },
-  { id: "educacion",  label: "educacion",   num: "04" },
-  { id: "habilidades", label: "skills",      num: "05" },
-  { id: "proyectos",  label: "proyectos",   num: "06" },
+  { id: "proyectos",  label: "proyectos",   num: "02" },
+  { id: "habilidades", label: "stack",       num: "03" },
+  { id: "experiencia", label: "experiencia", num: "04" },
+  { id: "educacion",  label: "educacion",   num: "05" },
+  { id: "sobre-mi",   label: "sobre_mi",    num: "06" },
   { id: "contacto",   label: "contacto",    num: "07" },
 ];
 
