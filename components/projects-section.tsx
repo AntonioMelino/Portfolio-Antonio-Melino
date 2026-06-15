@@ -65,7 +65,7 @@ const projects = [
     title: "Verificador de Fotos",
     slug: "verificador_fotos",
     description:
-      "App para auditoría de imágenes: carga, detección de desvíos y gestión de resultados. Conversión PDF→JPG, filtrado aleatorio y exportación a Excel.",
+      "App para EMA Servicios de auditoría de imágenes: carga, detección de desvíos y gestión de resultados. Conversión PDF→JPG, filtrado aleatorio y exportación a Excel.",
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442779/EMA-gif_eqz9vg.gif",

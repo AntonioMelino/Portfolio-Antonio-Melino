@@ -128,7 +128,7 @@ export function HeroSection() {
                 ver_proyectos()
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <a href="/Antonio_Melino_CV.pdf" download>
+              <a href="/Antonio__Melino__CV.pdf" download>
                 <Button
                   size="lg"
                   variant="outline"
