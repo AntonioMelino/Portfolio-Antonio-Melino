@@ -12,8 +12,9 @@ const experiences = [
     description:
       "Gestión operativa del sistema interno para el control de mercadería, realizando ajustes de stock, emisión de remitos y análisis de movimientos.",
     achievements: [
-      "Operación diaria de sistema interno (Java desktop) para registro de ingresos y egresos de mercadería.",
-      "Gestión de ajustes de stock y remitos de devolución mediante software interno.",
+      "Desarrollé Vencix, aplicación web fullstack interna que centraliza el control de vencimientos de toda la sucursal, reduciendo el riesgo de pérdidas por productos vencidos y mejorando la coordinación entre empleados.",
+      "Opero diariamente el sistema interno (Java desktop) para registro de ingresos y egresos de mercadería.",
+      "Gestiono ajustes de stock y remitos de devolución mediante software interno.",
       "Manejo avanzado de Excel para control de cargas y análisis de movimientos.",
       "Atención al cliente combinando trato directo con gestión administrativa.",
     ],
@@ -27,9 +28,9 @@ const experiences = [
     description:
       "Desarrollo de soluciones web personalizadas para el sistema interno. Trabajo en equipo con usuarios y personal.",
     achievements: [
-      "Diseño y desarrollo de una app web para auditoría de imágenes con HTML, CSS y JavaScript — adoptada a nivel operativo.",
-      "Procesamiento de datos desde SQL y Excel, asegurando calidad e integridad de la información.",
-      "Generación de reportes analíticos para soporte en la toma de decisiones.",
+      "Diseñé y desarrollé una app web para auditoría de imágenes con HTML, CSS y JavaScript — adoptada a nivel operativo.",
+      "Procesé datos desde SQL y Excel, asegurando calidad e integridad de la información.",
+      "Generé reportes analíticos para soporte en la toma de decisiones.",
       "Mapeo geográfico de direcciones de usuarios para análisis de distribución.",
     ],
   },
@@ -39,13 +40,12 @@ export function ExperienceSection() {
   return (
     <section id="experiencia" className="py-24 px-6 scroll-mt-20">
       <div className="container mx-auto max-w-4xl">
-
         {/* Header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 03. experience.ts</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Experiencia
-          </h2>
+          <p className="font-mono text-xs text-primary/60 mb-3">
+            // 03. experience.ts
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Experiencia</h2>
           <p className="text-lg text-muted-foreground">
             Trayectoria profesional construyendo soluciones digitales
           </p>
@@ -58,13 +58,16 @@ export function ExperienceSection() {
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div key={index} className="relative pl-16 animate-fade-up" style={{ animationDelay: `${index * 150}ms`, opacity: 0 }}>
+              <div
+                key={index}
+                className="relative pl-16 animate-fade-up"
+                style={{ animationDelay: `${index * 150}ms`, opacity: 0 }}
+              >
                 {/* Timeline dot */}
                 <div className="absolute left-3 top-1.5 w-4 h-4 rounded-full border-2 border-primary bg-background z-10" />
 
                 {/* Card */}
                 <div className="border border-border rounded-lg p-6 bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 group">
-
                   {/* Header row */}
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
                     <div className="flex items-center gap-4">
@@ -76,7 +79,9 @@ export function ExperienceSection() {
                           fill
                           className="object-contain"
                           sizes="64px"
-                          onError={(e) => { e.currentTarget.style.display = "none"; }}
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
                         />
                       </div>
                       <div>
@@ -103,7 +108,9 @@ export function ExperienceSection() {
                   <ul className="space-y-2">
                     {exp.achievements.map((item, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm">
-                        <span className="font-mono text-primary mt-0.5 flex-shrink-0">▸</span>
+                        <span className="font-mono text-primary mt-0.5 flex-shrink-0">
+                          ▸
+                        </span>
                         <span className="text-muted-foreground">{item}</span>
                       </li>
                     ))}

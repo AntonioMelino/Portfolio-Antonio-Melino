@@ -37,11 +37,63 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Vencix",
+    slug: "vencix",
+    description:
+      "Sistema web interno fullstack para Maxiconsumo S.A. que centraliza el control de productos próximos a vencer con roles admin/empleado, autocompletado de 8.500 artículos por código de barras, notificaciones en tiempo real y PWA instalable. Gestionado con GitHub Projects.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548344/Vencix_-_pantalla_de_inicio_xvsakp.png",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548347/Vencix-gif_crbira.gif",
+    tags: [
+      "ASP.NET Core 10",
+      "React 19",
+      "TypeScript",
+      "PostgreSQL",
+      "Supabase",
+      "Tailwind CSS",
+      "JWT",
+      "PWA",
+      "Railway",
+      "Vercel",
+    ],
+    demo: "#",
+    github: "#",
+    gallery: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548344/Vencix_-_pantalla_de_inicio_xvsakp.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548347/Vencix-gif_crbira.gif",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548344/Vencix_-_pantalla_de_inicio_xvsakp.png",
+    ],
+  },
+  {
+    title: "Techos Nass",
+    slug: "techos_nass",
+    description:
+      "Web moderna y responsive para negocio de techos. Incluye Google Maps, opiniones de clientes y contacto directo vía WhatsApp.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Google Maps API",
+      "Vercel",
+    ],
+    demo: "https://techos-nass.vercel.app/",
+    github: "https://github.com/AntonioMelino/TechosNass",
+    gallery: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
+    ],
+  },
+  {
     title: "Gamer Zone App",
     slug: "gamer_zone_app",
     description:
       "Tienda online de productos gamer con React, Firebase y MUI. Catálogo, filtros por categoría, carrito de compras y autenticación de usuarios.",
-    image: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442488/GamerZoneApp-gif_eszq7w.gif",
     tags: ["React", "Material-UI", "Firebase", "JavaScript", "Vercel"],
     demo: "https://gamer-zone-app.vercel.app/",
@@ -53,27 +105,12 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Techos Nass",
-    slug: "techos_nass",
-    description:
-      "Web moderna y responsive para negocio de techos. Incluye Google Maps, opiniones de clientes y contacto directo vía WhatsApp.",
-    image: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
-    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Google Maps API", "Vercel"],
-    demo: "https://techos-nass.vercel.app/",
-    github: "https://github.com/AntonioMelino/TechosNass",
-    gallery: [
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
-    ],
-  },
-  {
     title: "Verificador de Fotos",
     slug: "verificador_fotos",
     description:
-      "App para auditoría de imágenes: carga, detección de desvíos y gestión de resultados. Conversión PDF→JPG, filtrado aleatorio y exportación a Excel.",
-    image: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
+      "App para EMA Servicios de auditoría de imágenes: carga, detección de desvíos y gestión de resultados. Conversión PDF→JPG, filtrado aleatorio y exportación a Excel.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442779/EMA-gif_eqz9vg.gif",
     tags: ["HTML", "CSS", "JavaScript", "Firebase"],
     demo: "https://verificador-de-fotos.web.app/",
@@ -84,22 +121,6 @@ const projects: Project[] = [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
     ],
   },
-  {
-    title: "Calculadora",
-    slug: "calculadora_net",
-    description:
-      "Calculadora de escritorio creada con C# (.NET y Windows Forms) con operaciones básicas e interfaz simple e intuitiva.",
-    image: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442662/Calculadora-foto_qeao2n.jpg",
-    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442770/Calculadora-gif_yvudqw.gif",
-    tags: ["C#", ".NET", "Windows Forms"],
-    demo: "#",
-    github: "https://github.com/AntonioMelino/Calculadora",
-    gallery: [
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442662/Calculadora-foto_qeao2n.jpg",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442770/Calculadora-gif_yvudqw.gif",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442662/Calculadora-foto_qeao2n.jpg",
-    ],
-  },
 ]
 
 export function ProjectsSection() {
@@ -108,13 +129,12 @@ export function ProjectsSection() {
   return (
     <section id="proyectos" className="py-24 px-6 scroll-mt-20 bg-secondary/20">
       <div className="container mx-auto max-w-6xl">
-
         {/* Header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 06. projects/</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Proyectos
-          </h2>
+          <p className="font-mono text-xs text-primary/60 mb-3">
+            // 06. projects/
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Proyectos</h2>
           <p className="text-lg text-muted-foreground">
             Una selección de proyectos en producción
           </p>
@@ -196,16 +216,18 @@ export function ProjectsSection() {
                       demo()
                     </a>
                   )}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
-                  >
-                    <SvgGithub />
-                    source
-                  </a>
+                  {project.github !== "#" && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
+                    >
+                      <SvgGithub />
+                      source
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -278,15 +300,17 @@ export function ProjectsSection() {
                     demo()
                   </a>
                 )}
-                <a
-                  href={selectedProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
-                >
-                  <SvgGithub />
-                  source
-                </a>
+                {selectedProject.github !== "#" && (
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
+                  >
+                    <SvgGithub />
+                    source
+                  </a>
+                )}
               </div>
             </>
           )}

@@ -33,23 +33,23 @@ const skillCategories = [
   {
     key: "database",
     title: "Base de Datos",
-    skills: ["Firebase (Firestore)", "SQL", "MySQL", "Entity Framework (ORM)"],
+    skills: [
+      "PostgreSQL (Supabase)",
+      "Firebase (Firestore)",
+      "SQL",
+      "MySQL",
+      "Entity Framework (ORM)",
+    ],
   },
   {
     key: "devops",
     title: "DevOps & Cloud",
-    skills: ["Git", "GitHub", "Vercel", "Docker", "AWS", "Azure"],
+    skills: ["Git", "GitHub", "Vercel", "Docker", "AWS", "Azure", "Railway"],
   },
   {
     key: "ai",
     title: "IA & Dev Tools",
-    skills: [
-      "Claude Code",
-      "DeepSeek",
-      "Gemini",
-      "GitHub Copilot",
-      "Microsoft Copilot",
-    ],
+    skills: ["Claude Code", "DeepSeek", "GitHub Copilot"],
   },
   {
     key: "soft",
@@ -57,6 +57,8 @@ const skillCategories = [
     skills: [
       "Agile",
       "Scrum",
+      "GitHub Projects",
+      "POO",
       "Trabajo colaborativo",
       "Resolución de problemas",
     ],
