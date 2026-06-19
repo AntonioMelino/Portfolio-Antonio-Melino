@@ -387,10 +387,10 @@ export function ProjectsSection() {
           if (!open) setSelectedProject(null);
         }}
       >
-        <DialogContent className="max-w-2xl bg-card border border-border p-6">
+        <DialogContent className="max-w-[100vw] sm:max-w-[100vw] w-screen h-auto max-h-[95vh] overflow-y-auto md:h-screen md:max-h-screen md:overflow-hidden rounded-none border-0 bg-card p-4 md:p-6 flex flex-col">
           {selectedProject && (
             <>
-              <DialogHeader className="mb-4">
+              <DialogHeader className="flex-shrink-0 mb-3">
                 <DialogTitle className="font-mono text-lg text-primary">
                   ./{selectedProject.slug}.tsx
                 </DialogTitle>
@@ -407,18 +407,18 @@ export function ProjectsSection() {
               </DialogHeader>
 
               {/* Carousel */}
-              <div className="px-10">
+              <div className="flex-1 min-h-0 px-8">
                 <Carousel opts={{ loop: true }}>
                   <CarouselContent>
                     {selectedProject.gallery.map((src, index) => (
                       <CarouselItem key={index}>
-                        <div className="relative h-64 bg-muted rounded-lg overflow-hidden">
+                        <div className="relative aspect-video w-full md:aspect-auto md:h-[calc(100vh-220px)] bg-muted rounded-lg overflow-hidden">
                           <Image
                             src={src}
                             alt={`${selectedProject.title} screenshot ${index + 1}`}
                             fill
-                            className="object-contain p-2"
-                            sizes="(max-width: 768px) 100vw, 640px"
+                            className="object-contain"
+                            sizes="100vw"
                           />
                         </div>
                       </CarouselItem>
@@ -429,35 +429,35 @@ export function ProjectsSection() {
                 </Carousel>
               </div>
 
-              {/* Description */}
-              <p className="text-sm text-muted-foreground leading-relaxed mt-4">
-                {selectedProject.description}
-              </p>
-
-              {/* Links */}
-              <div className="flex gap-3 mt-4">
-                {selectedProject.demo !== "#" && (
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground rounded-md font-mono text-xs hover:bg-primary/90 transition-colors"
-                  >
-                    <ExternalLink className="h-3.5 w-3.5" />
-                    demo()
-                  </a>
-                )}
-                {selectedProject.github !== "#" && (
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
-                  >
-                    <SvgGithub />
-                    source
-                  </a>
-                )}
+              {/* Description + Links — footer compacto */}
+              <div className="flex-shrink-0 mt-3 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <p className="text-sm text-muted-foreground leading-relaxed md:max-w-2xl">
+                  {selectedProject.description}
+                </p>
+                <div className="flex gap-3 flex-shrink-0">
+                  {selectedProject.demo !== "#" && (
+                    <a
+                      href={selectedProject.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground rounded-md font-mono text-xs hover:bg-primary/90 transition-colors"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      demo()
+                    </a>
+                  )}
+                  {selectedProject.github !== "#" && (
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
+                    >
+                      <SvgGithub />
+                      source
+                    </a>
+                  )}
+                </div>
               </div>
             </>
           )}
