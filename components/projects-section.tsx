@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ExternalLink, Images } from "lucide-react"
+import { ExternalLink, Images, Star } from "lucide-react"
 import Image from "next/image"
 import {
   Dialog,
@@ -33,12 +33,14 @@ interface Project {
   demo: string
   github: string
   gallery: string[]
+  featured?: boolean
 }
 
 const projects: Project[] = [
   {
     title: "Vencix",
     slug: "vencix",
+    featured: true,
     description:
       "Sistema web interno fullstack para Maxiconsumo S.A. que centraliza el control de productos próximos a vencer con roles admin/empleado, autocompletado de 8.500 artículos por código de barras, notificaciones en tiempo real y PWA instalable. Gestionado con GitHub Projects.",
     image:
@@ -126,6 +128,9 @@ const projects: Project[] = [
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
+  const featuredProject = projects.find((p) => p.featured) ?? null
+  const otherProjects = projects.filter((p) => !p.featured)
+
   return (
     <section id="proyectos" className="py-24 px-6 scroll-mt-20 bg-secondary/20">
       <div className="container mx-auto max-w-6xl">
@@ -140,8 +145,135 @@ export function ProjectsSection() {
           </p>
         </div>
 
+        {/* Featured project */}
+        {featuredProject && (
+          <div className="mb-8">
+            {/* Featured label */}
+            <div className="flex items-center gap-2 mb-3">
+              <p className="font-mono text-xs text-primary/60">// featured.project</p>
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
+                <Star className="h-3 w-3 text-primary fill-primary" />
+                <span className="font-mono text-[10px] text-primary">proyecto destacado</span>
+              </div>
+            </div>
+
+            <div
+              onClick={() => setSelectedProject(featuredProject)}
+              className="border border-primary/40 rounded-xl overflow-hidden group hover:border-primary/70 hover:shadow-[0_0_60px_rgba(0,212,255,0.15)] transition-all duration-300 bg-card cursor-pointer flex flex-col md:flex-row"
+            >
+              {/* Terminal bar — mobile only */}
+              <div className="flex items-center justify-between px-4 py-3 bg-secondary border-b border-border md:hidden">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1.5 flex-shrink-0">
+                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                  </div>
+                  <span className="font-mono text-xs text-muted-foreground truncate">
+                    ./{featuredProject.slug}.tsx
+                  </span>
+                </div>
+                <Star className="h-3.5 w-3.5 text-primary fill-primary opacity-70" />
+              </div>
+
+              {/* Image — left side on desktop */}
+              <div className="relative h-64 md:h-auto md:w-1/2 overflow-hidden bg-muted flex-shrink-0">
+                <Image
+                  src={featuredProject.image}
+                  alt={featuredProject.title}
+                  fill
+                  className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-0"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <Image
+                  src={featuredProject.gif}
+                  alt={`${featuredProject.title} demo`}
+                  fill
+                  className="object-contain p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Images className="h-3 w-3 text-primary" />
+                  <span className="font-mono text-[10px] text-primary">galería</span>
+                </div>
+              </div>
+
+              {/* Content — right side on desktop */}
+              <div className="p-6 md:w-1/2 flex flex-col justify-between">
+                {/* Terminal bar — desktop only */}
+                <div className="hidden md:flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 flex-shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                    </div>
+                    <span className="font-mono text-xs text-muted-foreground truncate">
+                      ./{featuredProject.slug}.tsx
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
+                    <Star className="h-3 w-3 text-primary fill-primary" />
+                    <span className="font-mono text-[10px] text-primary">destacado</span>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                    {featuredProject.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+                    {featuredProject.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {featuredProject.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono text-xs px-2 py-0.5 border border-primary/25 text-primary/70 bg-primary/5 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Links */}
+                <div className="flex gap-3">
+                  {featuredProject.demo !== "#" && (
+                    <a
+                      href={featuredProject.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground rounded-md font-mono text-xs hover:bg-primary/90 transition-colors"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      demo()
+                    </a>
+                  )}
+                  {featuredProject.github !== "#" && (
+                    <a
+                      href={featuredProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
+                    >
+                      <SvgGithub />
+                      source
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Other projects grid */}
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project) => (
+          {otherProjects.map((project) => (
             <div
               key={project.title}
               onClick={() => setSelectedProject(project)}
