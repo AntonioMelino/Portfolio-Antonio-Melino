@@ -1,39 +1,39 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ExternalLink, Images, Star } from "lucide-react"
-import Image from "next/image"
+import { useState } from "react";
+import { ExternalLink, Images, Star } from "lucide-react";
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
 
 const SvgGithub = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5">
     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
   </svg>
-)
+);
 
 interface Project {
-  title: string
-  slug: string
-  description: string
-  image: string
-  gif: string
-  tags: string[]
-  demo: string
-  github: string
-  gallery: string[]
-  featured?: boolean
+  title: string;
+  slug: string;
+  description: string;
+  image: string;
+  gif: string;
+  tags: string[];
+  demo: string;
+  github: string;
+  gallery: string[];
+  featured?: boolean;
 }
 
 const projects: Project[] = [
@@ -63,7 +63,8 @@ const projects: Project[] = [
     gallery: [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548344/Vencix_-_pantalla_de_inicio_xvsakp.png",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548347/Vencix-gif_crbira.gif",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548344/Vencix_-_pantalla_de_inicio_xvsakp.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830854/Vencix-_pantalla_de_estadisticas_jxl9eg.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830855/Vencix_-_pantalla_de_recepcion_shm3ti.png",
     ],
   },
   {
@@ -86,7 +87,8 @@ const projects: Project[] = [
     gallery: [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830903/Techos_Nass_-_pantalla_de_opiniones_pkngno.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830903/Techos_Nass_-_pantalla_de_contacto_k4m43m.png",
     ],
   },
   {
@@ -103,7 +105,8 @@ const projects: Project[] = [
     gallery: [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442488/GamerZoneApp-gif_eszq7w.gif",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781831222/Gamer_Zone_App_-_pantalla_de_detalle_spwlov.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781831223/Gamer_Zone_App_-_pantalla_de_carrito_lahk7p.png",
     ],
   },
   {
@@ -123,13 +126,13 @@ const projects: Project[] = [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
     ],
   },
-]
+];
 
 export function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const featuredProject = projects.find((p) => p.featured) ?? null
-  const otherProjects = projects.filter((p) => !p.featured)
+  const featuredProject = projects.find((p) => p.featured) ?? null;
+  const otherProjects = projects.filter((p) => !p.featured);
 
   return (
     <section id="proyectos" className="py-24 px-6 scroll-mt-20 bg-secondary/20">
@@ -150,10 +153,14 @@ export function ProjectsSection() {
           <div className="mb-8">
             {/* Featured label */}
             <div className="flex items-center gap-2 mb-3">
-              <p className="font-mono text-xs text-primary/60">// featured.project</p>
+              <p className="font-mono text-xs text-primary/60">
+                // featured.project
+              </p>
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
                 <Star className="h-3 w-3 text-primary fill-primary" />
-                <span className="font-mono text-[10px] text-primary">proyecto destacado</span>
+                <span className="font-mono text-[10px] text-primary">
+                  proyecto destacado
+                </span>
               </div>
             </div>
 
@@ -194,7 +201,9 @@ export function ProjectsSection() {
                 />
                 <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Images className="h-3 w-3 text-primary" />
-                  <span className="font-mono text-[10px] text-primary">galería</span>
+                  <span className="font-mono text-[10px] text-primary">
+                    galería
+                  </span>
                 </div>
               </div>
 
@@ -214,7 +223,9 @@ export function ProjectsSection() {
                   </div>
                   <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
                     <Star className="h-3 w-3 text-primary fill-primary" />
-                    <span className="font-mono text-[10px] text-primary">destacado</span>
+                    <span className="font-mono text-[10px] text-primary">
+                      destacado
+                    </span>
                   </div>
                 </div>
 
@@ -309,7 +320,9 @@ export function ProjectsSection() {
                 />
                 <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Images className="h-3 w-3 text-primary" />
-                  <span className="font-mono text-[10px] text-primary">galería</span>
+                  <span className="font-mono text-[10px] text-primary">
+                    galería
+                  </span>
                 </div>
               </div>
 
@@ -370,7 +383,9 @@ export function ProjectsSection() {
       {/* Gallery Modal */}
       <Dialog
         open={selectedProject !== null}
-        onOpenChange={(open) => { if (!open) setSelectedProject(null) }}
+        onOpenChange={(open) => {
+          if (!open) setSelectedProject(null);
+        }}
       >
         <DialogContent className="max-w-2xl bg-card border border-border p-6">
           {selectedProject && (
@@ -449,5 +464,5 @@ export function ProjectsSection() {
         </DialogContent>
       </Dialog>
     </section>
-  )
+  );
 }
