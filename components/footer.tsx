@@ -11,7 +11,7 @@ export function Footer() {
           </p>
           <p className="font-mono text-xs text-muted-foreground">
             <span className="text-primary/50">// </span>
-            built with Next.js & Tailwind — {new Date().getFullYear()}
+            built with Next.js & Tailwind — <span className="text-primary/50">©</span> 2025 Antonio Melino
           </p>
         </div>
       </div>
