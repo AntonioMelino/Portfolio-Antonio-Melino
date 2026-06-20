@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { ExternalLink, Images, Star } from "lucide-react";
 import Image from "next/image";
 import {
@@ -33,6 +34,7 @@ interface Project {
   demo: string;
   github: string;
   gallery: string[];
+  galleryMobile?: string[];
   featured?: boolean;
 }
 
@@ -66,6 +68,11 @@ const projects: Project[] = [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830854/Vencix-_pantalla_de_estadisticas_jxl9eg.png",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830855/Vencix_-_pantalla_de_recepcion_shm3ti.png",
     ],
+    galleryMobile: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781983767/Vencix_-_pantalla_de_estadisticas_Mobile_gn0ove.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781983767/Vencix_-_pantalla_de_inicio_Mobile_z0mzob.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781983767/Vencix_-_pantalla_de_vencimientos_Mobile_fnmid3.jpg",
+    ],
   },
   {
     title: "Techos Nass",
@@ -90,6 +97,11 @@ const projects: Project[] = [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830903/Techos_Nass_-_pantalla_de_opiniones_pkngno.png",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781830903/Techos_Nass_-_pantalla_de_contacto_k4m43m.png",
     ],
+    galleryMobile: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781985963/Techos_Nass_-_pantalla_de_inicio_Mobile_xrenqh.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781985963/Techos_Nass_-_pantalla_de_maps_Mobile_s2q1q7.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781985962/Techos_Nass_-_pantalla_de_contacto_Mobile_sxf7bp.png",
+    ],
   },
   {
     title: "Gamer Zone App",
@@ -107,6 +119,11 @@ const projects: Project[] = [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442488/GamerZoneApp-gif_eszq7w.gif",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781831222/Gamer_Zone_App_-_pantalla_de_detalle_spwlov.png",
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781831223/Gamer_Zone_App_-_pantalla_de_carrito_lahk7p.png",
+    ],
+    galleryMobile: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986052/Gamer_Zone_App_-_pantalla_de_inicio_Mobile_z8cpey.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986051/Gamer_Zone_App_-_pantalla_de_detalle_Mobile_lbzoek.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986038/Gamer_Zone_App_-_pantalla_de_carrito_Mobile_xssq16.png",
     ],
   },
   {
@@ -130,6 +147,7 @@ const projects: Project[] = [
 
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const isMobile = useIsMobile();
 
   const featuredProject = projects.find((p) => p.featured) ?? null;
   const otherProjects = projects.filter((p) => !p.featured);
@@ -410,9 +428,14 @@ export function ProjectsSection() {
               <div className="flex-1 min-h-0 px-8">
                 <Carousel opts={{ loop: true }}>
                   <CarouselContent>
-                    {selectedProject.gallery.map((src, index) => (
+                    {(isMobile && selectedProject.galleryMobile?.length
+                      ? selectedProject.galleryMobile
+                      : selectedProject.gallery
+                    ).map((src, index) => (
                       <CarouselItem key={index}>
-                        <div className="relative aspect-video w-full md:aspect-auto md:h-[calc(100vh-220px)] bg-muted rounded-lg overflow-hidden">
+                        <div
+                          className={`relative w-full bg-muted rounded-lg overflow-hidden ${isMobile && selectedProject.galleryMobile?.length ? "aspect-[9/16] max-h-[55vh]" : "aspect-video md:aspect-auto md:h-[calc(100vh-220px)]"}`}
+                        >
                           <Image
                             src={src}
                             alt={`${selectedProject.title} screenshot ${index + 1}`}
