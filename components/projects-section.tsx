@@ -104,6 +104,29 @@ const projects: Project[] = [
     ],
   },
   {
+    title: "Mi cuaderno de idiomas",
+    slug: "mi_cuaderno_de_idiomas",
+    description:
+      "Landing page personal para centralizar el aprendizaje de idiomas: writings corregidos y apuntes de gramática/vocabulario organizados por idioma y nivel (A1 → C1), con progreso desbloqueable y arquitectura escalable a nuevos idiomas.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783983857/Mi_cuaderno_de_idiomas_-_pantalla_de_inicio_kt65wg.png",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783984299/Mi_cuaderno_de_idiomas_-_gif_x2l7pc.gif",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS v4", "Vercel"],
+    demo: "https://mi-cuaderno-de-idiomas.vercel.app/",
+    github: "https://github.com/AntonioMelino/mi-cuaderno-de-idiomas",
+    gallery: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783983857/Mi_cuaderno_de_idiomas_-_pantalla_de_inicio_kt65wg.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783984299/Mi_cuaderno_de_idiomas_-_gif_x2l7pc.gif",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783983856/Mi_cuaderno_de_idiomas_-_pantalla_de_writings_pdlqhq.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783983856/Mi_cuaderno_de_idiomas_-_pantalla_de_apuntes_nmkuab.png",
+    ],
+    galleryMobile: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986052/Gamer_Zone_App_-_pantalla_de_inicio_Mobile_z8cpey.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986051/Gamer_Zone_App_-_pantalla_de_detalle_Mobile_lbzoek.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986038/Gamer_Zone_App_-_pantalla_de_carrito_Mobile_xssq16.png",
+    ],
+  },
+  {
     title: "Gamer Zone App",
     slug: "gamer_zone_app",
     description:
