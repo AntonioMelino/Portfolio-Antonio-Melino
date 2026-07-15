@@ -75,6 +75,40 @@ const projects: Project[] = [
     ],
   },
   {
+    title: "Bitácora",
+    slug: "bitacora",
+    description:
+      "PWA fullstack de organización de viajes: gestión de gastos multi-moneda, itinerario diario, checklist, alojamientos, ciudades con lugares para visitar y opciones de SIM/eSIM para viajes internacionales. Incluye exportación a Excel, asistente de IA integrado y soporte offline completo.",
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076972/Bitacora_-_pantalla_de_inicio_xi6cxz.png",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076944/Bitacora_-_gif_k9z2op.gif",
+    tags: [
+      "ASP.NET Core 10",
+      "React 19",
+      "TypeScript",
+      "PostgreSQL",
+      "Supabase",
+      "Tailwind CSS",
+      "JWT",
+      "PWA",
+      "Railway",
+      "Vercel",
+    ],
+    demo: "https://bitacora-travel.vercel.app/",
+    github: "https://github.com/AntonioMelino/bitacora",
+    gallery: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076972/Bitacora_-_pantalla_de_inicio_xi6cxz.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076944/Bitacora_-_gif_k9z2op.gif",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076943/Bitacora_-_pantalla_de_menu_du2iea.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076944/Bitacora_-_pantalla_de_itinerario_h1omu1.png",
+    ],
+    galleryMobile: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784077364/Bitacora_-_pantalla_de_inicio_mobile_wv8bjl.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784077363/Bitacora_-_pantalla_principal_mobile_wpaaij.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784077364/Bitacora_-_pantalla_de_menu_mobile_tzwbzw.png",
+    ],
+  },
+  {
     title: "Techos Nass",
     slug: "techos_nass",
     description:
@@ -121,9 +155,10 @@ const projects: Project[] = [
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783983856/Mi_cuaderno_de_idiomas_-_pantalla_de_apuntes_nmkuab.png",
     ],
     galleryMobile: [
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986052/Gamer_Zone_App_-_pantalla_de_inicio_Mobile_z8cpey.png",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986051/Gamer_Zone_App_-_pantalla_de_detalle_Mobile_lbzoek.png",
-      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781986038/Gamer_Zone_App_-_pantalla_de_carrito_Mobile_xssq16.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784074751/Mi_cuaderno_de_idiomas_-_pantalla_de_inicio_cghgbq.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784074751/Mi_cuaderno_de_idiomas_-_pantalla_de_writings_r74avg.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784074751/Mi_cuaderno_de_idiomas_-_pantalla_de_apuntes_itldlw.png",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784074752/Mi_cuaderno_de_idiomas_-_pantalla_de_inicio_2_qxschi.png",
     ],
   },
   {
