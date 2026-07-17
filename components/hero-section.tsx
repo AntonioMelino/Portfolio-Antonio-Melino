@@ -128,11 +128,11 @@ export function HeroSection() {
                 ver_proyectos()
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <a href="/Antonio__Melino__CV.pdf" download>
+              <a href="/Antonio_Melino_CV.pdf" download>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="group font-mono gap-2 border-border hover:border-primary/60 bg-transparent"
+                  className="group font-mono gap-2 border-border hover:border-primary/60 bg-transparent dark:hover:bg-primary/10 dark:hover:text-primary"
                 >
                   <Download className="h-4 w-4 group-hover:scale-110 transition-transform" />
                   descargar_cv
