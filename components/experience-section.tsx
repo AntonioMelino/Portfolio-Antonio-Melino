@@ -1,8 +1,25 @@
 "use client";
 
 import Image from "next/image";
+import { Code2 } from "lucide-react";
 
 const experiences = [
+  {
+    company: "Freelance",
+    position: "Desarrollador Full Stack",
+    period: "Marzo 2026 – Presente",
+    logo: null,
+    logoScale: "",
+    description:
+      "Desarrollo aplicaciones web completas y full stack para clientes reales y uso interno, desde el diseño hasta el despliegue en producción.",
+    achievements: [
+      "Desarrollé Techos Nass, sitio institucional responsive y optimizado para SEO con integración de Google Maps, reseñas de clientes y contacto vía WhatsApp — finalizado y en producción.",
+      "Desarrollé Vencix, aplicación interna full stack para Maxiconsumo S.A. con API REST, autenticación JWT y base de datos relacional.",
+      "Backend con C#, .NET Core, ASP.NET y Java; frontend con React.js, JavaScript, HTML y CSS.",
+      "Bases de datos relacionales y no relacionales (SQL Server, PostgreSQL, MySQL, Firebase Firestore) y despliegue con Docker en AWS, Vercel y Railway.",
+      "Gestión directa de clientes: relevamiento de necesidades, estimación de esfuerzos y mantenimiento correctivo en producción.",
+    ],
+  },
   {
     company: "Maxiconsumo S.A.",
     position: "Operador de Sistemas",
@@ -72,17 +89,21 @@ export function ExperienceSection() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
                     <div className="flex items-center gap-4">
                       {/* Logo */}
-                      <div className="relative h-16 w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden">
-                        <Image
-                          src={exp.logo}
-                          alt={`Logo ${exp.company}`}
-                          fill
-                          className="object-contain"
-                          sizes="64px"
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                          }}
-                        />
+                      <div className="relative h-16 w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden flex items-center justify-center">
+                        {exp.logo ? (
+                          <Image
+                            src={exp.logo}
+                            alt={`Logo ${exp.company}`}
+                            fill
+                            className="object-contain"
+                            sizes="64px"
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                            }}
+                          />
+                        ) : (
+                          <Code2 className="h-7 w-7 text-primary dark:text-black" />
+                        )}
                       </div>
                       <div>
                         <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
