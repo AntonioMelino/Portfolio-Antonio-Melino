@@ -57,7 +57,7 @@ export function ContactSection() {
 
         {/* Header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 07. contact.tsx</p>
+          <p className="font-mono text-xs text-primary/60 mb-3">// 06. contact.tsx</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Trabajemos Juntos
           </h2>
