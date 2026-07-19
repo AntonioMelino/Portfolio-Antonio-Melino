@@ -81,23 +81,27 @@ export function SkillsSection() {
             Tecnologías y herramientas que utilizo para crear soluciones
             robustas y escalables
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 border border-border rounded-full bg-secondary/50">
-            <Globe size={13} className="text-primary" />
-            <span className="font-mono text-xs text-muted-foreground">
-              🇪🇸 Español nativo &nbsp;|&nbsp; 🇬🇧 Inglés técnico
-            </span>
+          <div className="mt-4 inline-flex items-center gap-2 max-w-full px-3 py-1.5 border border-border rounded-full bg-secondary/50">
+            <Globe size={13} className="text-primary shrink-0" />
+            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-mono text-xs text-muted-foreground">
+              <span className="whitespace-nowrap">🇪🇸 Español nativo</span>
+              <span className="text-muted-foreground/50" aria-hidden="true">
+                |
+              </span>
+              <span className="whitespace-nowrap">🇬🇧 Inglés técnico</span>
+            </div>
           </div>
         </div>
 
         {/* Skills grid — code block style */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid min-[400px]:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillCategories.map((category) => (
             <div
               key={category.key}
               className="border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 overflow-hidden"
             >
               {/* Card header */}
-              <div className="px-5 py-4 border-b border-border bg-secondary/40">
+              <div className="px-5 py-3 sm:py-4 border-b border-border bg-secondary/40">
                 <div className="font-mono text-sm">
                   <span className="text-primary/70">const </span>
                   <span className="text-foreground font-semibold">
@@ -108,7 +112,7 @@ export function SkillsSection() {
               </div>
 
               {/* Skills */}
-              <div className="px-5 py-4">
+              <div className="px-5 py-3 sm:py-4">
                 <div className="flex flex-wrap gap-1.5">
                   {category.skills.map((skill) => (
                     <span
@@ -122,7 +126,7 @@ export function SkillsSection() {
               </div>
 
               {/* Closing bracket */}
-              <div className="px-5 pb-4">
+              <div className="px-5 pb-3 sm:pb-4">
                 <span className="font-mono text-sm text-muted-foreground">
                   ]
                 </span>
