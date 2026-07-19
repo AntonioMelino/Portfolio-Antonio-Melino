@@ -217,7 +217,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
   return (
     <div
       onClick={() => onSelect(project)}
-      className="border border-border rounded-xl overflow-hidden group hover:border-primary/40 hover:shadow-[0_0_35px_rgba(0,212,255,0.1)] transition-all duration-300 bg-card cursor-pointer"
+      className="h-full flex flex-col border border-border rounded-xl overflow-hidden group hover:border-primary/40 hover:shadow-[0_0_35px_rgba(0,212,255,0.1)] transition-all duration-300 bg-card cursor-pointer"
     >
       {/* Terminal window title bar */}
       <div className="flex items-center gap-3 px-4 py-3 bg-secondary border-b border-border">
@@ -256,11 +256,11 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+        <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-1">
           {project.description}
         </p>
 
