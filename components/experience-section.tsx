@@ -1,7 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { Code2 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
+
+const MOBILE_ACHIEVEMENTS_PREVIEW_COUNT = 2;
 
 const experiences = [
   {
@@ -53,7 +58,135 @@ const experiences = [
   },
 ];
 
+type Experience = (typeof experiences)[number];
+
+interface ExperienceCardProps {
+  exp: Experience;
+  index: number;
+  isMobile: boolean;
+}
+
+function ExperienceCard({ exp, index, isMobile }: ExperienceCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const hasCollapsibleAchievements =
+    isMobile && exp.achievements.length > MOBILE_ACHIEVEMENTS_PREVIEW_COUNT;
+  const previewAchievements = hasCollapsibleAchievements
+    ? exp.achievements.slice(0, MOBILE_ACHIEVEMENTS_PREVIEW_COUNT)
+    : exp.achievements;
+  const extraAchievements = hasCollapsibleAchievements
+    ? exp.achievements.slice(MOBILE_ACHIEVEMENTS_PREVIEW_COUNT)
+    : [];
+
+  return (
+    <div
+      className="relative pl-10 sm:pl-16 animate-fade-up"
+      style={{ animationDelay: `${index * 150}ms`, opacity: 0 }}
+    >
+      {/* Timeline dot */}
+      <div className="absolute left-2 sm:left-3 top-1.5 w-4 h-4 rounded-full border-2 border-primary bg-background z-10" />
+
+      {/* Card */}
+      <div className="border border-border rounded-lg p-6 bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 group">
+        {/* Header row */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Logo */}
+            <div className="relative h-12 w-12 sm:h-16 sm:w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden flex items-center justify-center">
+              {exp.logo ? (
+                <Image
+                  src={exp.logo}
+                  alt={`Logo ${exp.company}`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 48px, 64px"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              ) : (
+                <Code2 className="h-5 w-5 sm:h-7 sm:w-7 text-primary dark:text-black" />
+              )}
+            </div>
+            <div>
+              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
+                {exp.position}
+              </h3>
+              <p className="font-mono text-sm text-primary/70 mt-0.5">
+                @ {exp.company}
+              </p>
+            </div>
+          </div>
+          {/* Date as comment — pill on mobile, plain text on desktop */}
+          <span
+            className={cn(
+              "font-mono text-xs text-muted-foreground whitespace-nowrap inline-flex w-fit items-center",
+              "rounded-full border border-border/60 bg-secondary/40 px-2 py-0.5",
+              "sm:inline sm:w-auto sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0",
+            )}
+          >
+            // {exp.period}
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-muted-foreground leading-relaxed mb-5 pl-4 border-l-2 border-primary/30">
+          {exp.description}
+        </p>
+
+        {/* Achievements */}
+        <ul className="space-y-2">
+          {previewAchievements.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm">
+              <span className="font-mono text-primary mt-0.5 flex-shrink-0">
+                ▸
+              </span>
+              <span className="text-muted-foreground">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        {hasCollapsibleAchievements && (
+          <>
+            <div
+              className={cn(
+                "grid transition-[grid-template-rows] duration-300 ease-out",
+                isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+              )}
+            >
+              <ul className="space-y-2 overflow-hidden">
+                {extraAchievements.map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm pt-2"
+                  >
+                    <span className="font-mono text-primary mt-0.5 flex-shrink-0">
+                      ▸
+                    </span>
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsExpanded((prev) => !prev)}
+              aria-expanded={isExpanded}
+              className="mt-3 font-mono text-xs text-primary hover:text-primary/80 transition-colors"
+            >
+              {isExpanded ? "Ver menos" : `Ver ${extraAchievements.length} más`}
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function ExperienceSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section id="experiencia" className="py-24 px-6 scroll-mt-20">
       <div className="container mx-auto max-w-4xl">
@@ -71,73 +204,16 @@ export function ExperienceSection() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-5 top-0 bottom-0 w-px bg-border" />
+          <div className="absolute left-4 sm:left-5 top-0 bottom-0 w-px bg-border" />
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div
-                key={index}
-                className="relative pl-16 animate-fade-up"
-                style={{ animationDelay: `${index * 150}ms`, opacity: 0 }}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-3 top-1.5 w-4 h-4 rounded-full border-2 border-primary bg-background z-10" />
-
-                {/* Card */}
-                <div className="border border-border rounded-lg p-6 bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 group">
-                  {/* Header row */}
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
-                    <div className="flex items-center gap-4">
-                      {/* Logo */}
-                      <div className="relative h-16 w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden flex items-center justify-center">
-                        {exp.logo ? (
-                          <Image
-                            src={exp.logo}
-                            alt={`Logo ${exp.company}`}
-                            fill
-                            className="object-contain"
-                            sizes="64px"
-                            onError={(e) => {
-                              e.currentTarget.style.display = "none";
-                            }}
-                          />
-                        ) : (
-                          <Code2 className="h-7 w-7 text-primary dark:text-black" />
-                        )}
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
-                          {exp.position}
-                        </h3>
-                        <p className="font-mono text-sm text-primary/70 mt-0.5">
-                          @ {exp.company}
-                        </p>
-                      </div>
-                    </div>
-                    {/* Date as comment */}
-                    <span className="font-mono text-xs text-muted-foreground whitespace-nowrap">
-                      // {exp.period}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-5 pl-4 border-l-2 border-primary/30">
-                    {exp.description}
-                  </p>
-
-                  {/* Achievements */}
-                  <ul className="space-y-2">
-                    {exp.achievements.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <span className="font-mono text-primary mt-0.5 flex-shrink-0">
-                          ▸
-                        </span>
-                        <span className="text-muted-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <ExperienceCard
+                key={exp.company}
+                exp={exp}
+                index={index}
+                isMobile={isMobile}
+              />
             ))}
           </div>
         </div>
