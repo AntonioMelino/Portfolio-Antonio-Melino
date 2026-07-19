@@ -1,5 +1,45 @@
 import { Globe } from "lucide-react";
 
+// Regional-indicator flag emoji (🇪🇸/🇬🇧) fall back to "ES"/"GB" text on
+// Windows (Segoe UI Emoji lacks flag glyphs), so these render as SVG instead.
+const FlagES = () => (
+  <svg
+    viewBox="0 0 3 2"
+    aria-hidden="true"
+    className="h-3 w-[18px] shrink-0 overflow-hidden rounded-[2px]"
+  >
+    <rect width="3" height="2" fill="#AA151B" />
+    <rect y="0.5" width="3" height="1" fill="#F1BF00" />
+  </svg>
+);
+
+const FlagGB = () => (
+  <svg
+    viewBox="0 0 60 30"
+    aria-hidden="true"
+    className="h-3 w-6 shrink-0 overflow-hidden rounded-[2px]"
+  >
+    <clipPath id="flag-gb-s">
+      <path d="M0,0 v30 h60 v-30 z" />
+    </clipPath>
+    <clipPath id="flag-gb-t">
+      <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
+    </clipPath>
+    <g clipPath="url(#flag-gb-s)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
+      <path
+        d="M0,0 L60,30 M60,0 L0,30"
+        clipPath="url(#flag-gb-t)"
+        stroke="#C8102E"
+        strokeWidth="4"
+      />
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
+    </g>
+  </svg>
+);
+
 const skillCategories = [
   {
     key: "frontend",
@@ -84,11 +124,17 @@ export function SkillsSection() {
           <div className="mt-4 inline-flex items-center gap-2 max-w-full px-3 py-1.5 border border-border rounded-full bg-secondary/50">
             <Globe size={13} className="text-primary shrink-0" />
             <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-mono text-xs text-muted-foreground">
-              <span className="whitespace-nowrap">🇪🇸 Español nativo</span>
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                <FlagES />
+                Español nativo
+              </span>
               <span className="text-muted-foreground/50" aria-hidden="true">
                 |
               </span>
-              <span className="whitespace-nowrap">🇬🇧 Inglés técnico</span>
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                <FlagGB />
+                Inglés técnico
+              </span>
             </div>
           </div>
         </div>
