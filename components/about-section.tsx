@@ -63,7 +63,7 @@ export function AboutSection() {
 
         {/* Section header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 05. about_me.tsx</p>
+          <p className="font-mono text-xs text-primary/60 mb-3">// 06. about_me.tsx</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Sobre Mí
           </h2>

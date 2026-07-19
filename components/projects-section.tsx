@@ -351,7 +351,7 @@ export function ProjectsSection() {
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 01. projects/
+            // 02. projects/
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Proyectos</h2>
           <p className="text-lg text-muted-foreground">

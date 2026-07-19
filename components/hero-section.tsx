@@ -79,7 +79,7 @@ export function HeroSection() {
           {/* Left — Text content */}
           <div className="space-y-6 animate-fade-up">
             {/* File label */}
-            <p className="font-mono text-xs text-primary/60">// hero.tsx</p>
+            <p className="font-mono text-xs text-primary/60">// 01. hero.tsx</p>
 
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 rounded-full bg-primary/5">
