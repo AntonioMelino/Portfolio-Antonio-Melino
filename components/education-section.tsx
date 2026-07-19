@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { CollapsibleAchievements } from "@/components/collapsible-achievements";
 
 const educationData = [
   {
@@ -70,6 +72,8 @@ const educationData = [
 ];
 
 export function EducationSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section id="educacion" className="py-24 px-6 scroll-mt-20 bg-secondary/20">
       <div className="container mx-auto max-w-6xl">
@@ -95,13 +99,13 @@ export function EducationSection() {
               {/* Package-style header */}
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="relative h-16 w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden">
+                  <div className="relative h-12 w-12 sm:h-16 sm:w-16 rounded-lg bg-white border border-border flex-shrink-0 overflow-hidden">
                     <Image
                       src={edu.logo}
                       alt={`Logo ${edu.institution}`}
                       fill
                       className="object-contain"
-                      sizes="64px"
+                      sizes="(max-width: 640px) 48px, 64px"
                       onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                   </div>
@@ -127,14 +131,14 @@ export function EducationSection() {
               </p>
 
               {/* Achievements */}
-              <ul className="space-y-1.5">
-                {edu.achievements.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm">
-                    <span className="font-mono text-primary mt-0.5 flex-shrink-0 text-xs">▸</span>
-                    <span className="text-muted-foreground text-xs leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <CollapsibleAchievements
+                achievements={edu.achievements}
+                isMobile={isMobile}
+                listClassName="space-y-1.5"
+                bulletClassName="font-mono text-primary mt-0.5 flex-shrink-0 text-xs"
+                textClassName="text-muted-foreground text-xs leading-relaxed"
+                extraItemsTopClassName="pt-1.5"
+              />
             </div>
           ))}
         </div>

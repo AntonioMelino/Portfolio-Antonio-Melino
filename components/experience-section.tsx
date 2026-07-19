@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Code2 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-
-const MOBILE_ACHIEVEMENTS_PREVIEW_COUNT = 2;
+import { CollapsibleAchievements } from "@/components/collapsible-achievements";
 
 const experiences = [
   {
@@ -67,17 +65,6 @@ interface ExperienceCardProps {
 }
 
 function ExperienceCard({ exp, index, isMobile }: ExperienceCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const hasCollapsibleAchievements =
-    isMobile && exp.achievements.length > MOBILE_ACHIEVEMENTS_PREVIEW_COUNT;
-  const previewAchievements = hasCollapsibleAchievements
-    ? exp.achievements.slice(0, MOBILE_ACHIEVEMENTS_PREVIEW_COUNT)
-    : exp.achievements;
-  const extraAchievements = hasCollapsibleAchievements
-    ? exp.achievements.slice(MOBILE_ACHIEVEMENTS_PREVIEW_COUNT)
-    : [];
-
   return (
     <div
       className="relative pl-10 sm:pl-16 animate-fade-up"
@@ -135,50 +122,10 @@ function ExperienceCard({ exp, index, isMobile }: ExperienceCardProps) {
         </p>
 
         {/* Achievements */}
-        <ul className="space-y-2">
-          {previewAchievements.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm">
-              <span className="font-mono text-primary mt-0.5 flex-shrink-0">
-                ▸
-              </span>
-              <span className="text-muted-foreground">{item}</span>
-            </li>
-          ))}
-        </ul>
-
-        {hasCollapsibleAchievements && (
-          <>
-            <div
-              className={cn(
-                "grid transition-[grid-template-rows] duration-300 ease-out",
-                isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-              )}
-            >
-              <ul className="space-y-2 overflow-hidden">
-                {extraAchievements.map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2 text-sm pt-2"
-                  >
-                    <span className="font-mono text-primary mt-0.5 flex-shrink-0">
-                      ▸
-                    </span>
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setIsExpanded((prev) => !prev)}
-              aria-expanded={isExpanded}
-              className="mt-3 font-mono text-xs text-primary hover:text-primary/80 transition-colors"
-            >
-              {isExpanded ? "Ver menos" : `Ver ${extraAchievements.length} más`}
-            </button>
-          </>
-        )}
+        <CollapsibleAchievements
+          achievements={exp.achievements}
+          isMobile={isMobile}
+        />
       </div>
     </div>
   );
