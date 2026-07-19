@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ExternalLink, Images, Star } from "lucide-react";
 import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
+import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +18,10 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
+
+const MOBILE_AUTOPLAY_DELAY_MS = 4000;
 
 const SvgGithub = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5">
@@ -203,12 +208,142 @@ const projects: Project[] = [
   },
 ];
 
+interface ProjectCardProps {
+  project: Project;
+  onSelect: (project: Project) => void;
+}
+
+function ProjectCard({ project, onSelect }: ProjectCardProps) {
+  return (
+    <div
+      onClick={() => onSelect(project)}
+      className="border border-border rounded-xl overflow-hidden group hover:border-primary/40 hover:shadow-[0_0_35px_rgba(0,212,255,0.1)] transition-all duration-300 bg-card cursor-pointer"
+    >
+      {/* Terminal window title bar */}
+      <div className="flex items-center gap-3 px-4 py-3 bg-secondary border-b border-border">
+        <div className="flex gap-1.5 flex-shrink-0">
+          <div className="w-3 h-3 rounded-full bg-red-500/70" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+          <div className="w-3 h-3 rounded-full bg-green-500/70" />
+        </div>
+        <span className="font-mono text-xs text-muted-foreground truncate">
+          ./{project.slug}.tsx
+        </span>
+      </div>
+
+      {/* Image with hover GIF */}
+      <div className="relative h-56 overflow-hidden bg-muted">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-0"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <Image
+          src={project.gif}
+          alt={`${project.title} demo`}
+          fill
+          className="object-contain p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Images className="h-3 w-3 text-primary" />
+          <span className="font-mono text-[10px] text-primary">
+            galería
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+          {project.description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="font-mono text-xs px-2 py-0.5 border border-primary/25 text-primary/70 bg-primary/5 rounded"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex gap-3">
+          {project.demo !== "#" && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground rounded-md font-mono text-xs hover:bg-primary/90 transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              demo()
+            </a>
+          )}
+          {project.github !== "#" && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <SvgGithub />
+              source
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const isMobile = useIsMobile();
 
   const featuredProject = projects.find((p) => p.featured) ?? null;
   const otherProjects = projects.filter((p) => !p.featured);
+
+  // Mobile "other projects" carousel: autoplay plugin, current-dot tracking
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: MOBILE_AUTOPLAY_DELAY_MS, stopOnInteraction: false }),
+  );
+  const [mobileApi, setMobileApi] = useState<CarouselApi>();
+  const [mobileCurrent, setMobileCurrent] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mql.matches);
+    const onChange = () => setPrefersReducedMotion(mql.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!mobileApi) return;
+    const onSelect = () => setMobileCurrent(mobileApi.selectedScrollSnap());
+    onSelect();
+    mobileApi.on("select", onSelect);
+    return () => {
+      mobileApi.off("select", onSelect);
+    };
+  }, [mobileApi]);
+
+  const mobileCarouselPlugins = prefersReducedMotion
+    ? []
+    : [autoplayPlugin.current];
 
   return (
     <section id="proyectos" className="py-24 px-6 scroll-mt-20 bg-secondary/20">
@@ -358,101 +493,52 @@ export function ProjectsSection() {
           </div>
         )}
 
-        {/* Other projects grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Other projects — desktop grid (unchanged) */}
+        <div className="hidden md:grid md:grid-cols-2 gap-6">
           {otherProjects.map((project) => (
-            <div
+            <ProjectCard
               key={project.title}
-              onClick={() => setSelectedProject(project)}
-              className="border border-border rounded-xl overflow-hidden group hover:border-primary/40 hover:shadow-[0_0_35px_rgba(0,212,255,0.1)] transition-all duration-300 bg-card cursor-pointer"
-            >
-              {/* Terminal window title bar */}
-              <div className="flex items-center gap-3 px-4 py-3 bg-secondary border-b border-border">
-                <div className="flex gap-1.5 flex-shrink-0">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                </div>
-                <span className="font-mono text-xs text-muted-foreground truncate">
-                  ./{project.slug}.tsx
-                </span>
-              </div>
-
-              {/* Image with hover GIF */}
-              <div className="relative h-56 overflow-hidden bg-muted">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-0"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <Image
-                  src={project.gif}
-                  alt={`${project.title} demo`}
-                  fill
-                  className="object-contain p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Images className="h-3 w-3 text-primary" />
-                  <span className="font-mono text-[10px] text-primary">
-                    galería
-                  </span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-mono text-xs px-2 py-0.5 border border-primary/25 text-primary/70 bg-primary/5 rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex gap-3">
-                  {project.demo !== "#" && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground rounded-md font-mono text-xs hover:bg-primary/90 transition-colors"
-                    >
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      demo()
-                    </a>
-                  )}
-                  {project.github !== "#" && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
-                    >
-                      <SvgGithub />
-                      source
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
+              project={project}
+              onSelect={setSelectedProject}
+            />
           ))}
+        </div>
+
+        {/* Other projects — mobile autoplay carousel */}
+        <div className="md:hidden">
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            plugins={mobileCarouselPlugins}
+            setApi={setMobileApi}
+            className="w-full"
+          >
+            <CarouselContent>
+              {otherProjects.map((project) => (
+                <CarouselItem key={project.title} className="basis-[85%]">
+                  <ProjectCard project={project} onSelect={setSelectedProject} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+
+          {/* Dots */}
+          <div className="flex items-center justify-center gap-2 mt-5">
+            {otherProjects.map((_, index) => (
+              <button
+                key={otherProjects[index].title}
+                type="button"
+                aria-label={`Ir al proyecto ${index + 1}`}
+                aria-current={index === mobileCurrent}
+                onClick={() => mobileApi?.scrollTo(index)}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  index === mobileCurrent
+                    ? "w-6 bg-primary"
+                    : "w-1.5 bg-border hover:bg-primary/40",
+                )}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
