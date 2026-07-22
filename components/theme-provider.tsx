@@ -1,10 +1,11 @@
 "use client";
 
 import * as React from "react";
-import {
-  ThemeProvider as NextThemesProvider,
-  type ThemeProviderProps,
-} from "next-themes";
+
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  defaultTheme?: string;
+}
 
 const ThemeContext = React.createContext<{
   theme: string;
@@ -16,19 +17,18 @@ const ThemeContext = React.createContext<{
   toggleTheme: () => null,
 });
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
   const [mounted, setMounted] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState("dark");
 
   React.useEffect(() => {
     setMounted(true);
-    const savedTheme =
-      localStorage.getItem("theme") || props.defaultTheme || "dark";
+    const savedTheme = localStorage.getItem("theme") || defaultTheme || "dark";
     setCurrentTheme(savedTheme);
     if (savedTheme === "dark") {
       document.documentElement.classList.add("dark");
     }
-  }, [props.defaultTheme]);
+  }, [defaultTheme]);
 
   const setTheme = React.useCallback((theme: string) => {
     setCurrentTheme(theme);
@@ -59,9 +59,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   }
 
   return (
-    <ThemeContext.Provider value={value}>
-      <NextThemesProvider {...props}>{children}</NextThemesProvider>
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 
