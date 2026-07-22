@@ -5,6 +5,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { ExternalLink, Images, Star } from "lucide-react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
+import { BorderBeam } from "border-beam";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -215,6 +216,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, onSelect }: ProjectCardProps) {
   return (
+    <BorderBeam className="h-full" colorVariant="ocean" theme="auto">
     <div
       onClick={() => onSelect(project)}
       className="h-full flex flex-col border border-border rounded-xl overflow-hidden group hover:border-primary/40 hover:shadow-[0_0_35px_rgba(0,212,255,0.1)] transition-all duration-300 bg-card cursor-pointer"
@@ -305,6 +307,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
         </div>
       </div>
     </div>
+    </BorderBeam>
   );
 }
 
@@ -375,6 +378,7 @@ export function ProjectsSection() {
               </div>
             </div>
 
+            <BorderBeam colorVariant="ocean" theme="auto">
             <div
               onClick={() => setSelectedProject(featuredProject)}
               className="border border-primary/40 rounded-xl overflow-hidden group hover:border-primary/70 hover:shadow-[0_0_60px_rgba(0,212,255,0.15)] transition-all duration-300 bg-card cursor-pointer flex flex-col md:flex-row"
@@ -490,6 +494,7 @@ export function ProjectsSection() {
                 </div>
               </div>
             </div>
+            </BorderBeam>
           </div>
         )}
 
