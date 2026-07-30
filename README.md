@@ -1,6 +1,6 @@
 # 🌓 Portafolio Profesional
 
-Un portafolio moderno y **responsive** desarrollado con **Next.js**, **React** y **Tailwind CSS**, diseñado para mostrar proyectos, habilidades y experiencia de manera clara y profesional. Optimizado para rendimiento y con soporte para **modo oscuro / claro**.
+Un portafolio moderno y **responsive** desarrollado con **Next.js 16**, **React 19**, **TypeScript** y **Tailwind CSS**, diseñado para mostrar proyectos, habilidades y experiencia de manera clara y profesional. Optimizado para rendimiento y con soporte para **modo oscuro / claro**.
 
 🌐 **Demo en vivo:** [mi portfolio](https://portfolio-antonio-melino.vercel.app/)
 
@@ -33,10 +33,12 @@ Un portafolio moderno y **responsive** desarrollado con **Next.js**, **React** y
 
 ## 🛠️ Tecnologías utilizadas
 
-* **Next.js** – Framework de React para renderizado estático y dinámico
-* **React** – Librería principal para la construcción de la interfaz
+* **Next.js 16** – Framework de React para renderizado estático y dinámico
+* **React 19** – Librería principal para la construcción de la interfaz
+* **TypeScript** – Tipado estático en todo el proyecto
 * **Tailwind CSS** – Estilización rápida y responsive
-* **EmailJS / Nodemailer** – Envío del formulario de contacto
+* **shadcn/ui & Radix UI** – Componentes accesibles y personalizables
+* **EmailJS** – Envío del formulario de contacto mediante una API Route de Next.js
 * **Framer Motion** – Animaciones suaves y transiciones
 * **React Icons** – Biblioteca de iconos
 * **Git & GitHub** – Control de versiones
@@ -56,7 +58,7 @@ Cada proyecto incluye una card con imagen estática que, al pasar el cursor, mue
 
 ### 📧 Formulario de contacto en tiempo real
 
-Los mensajes enviados a través del formulario son recibidos directamente en mi bandeja de entrada gracias a una integración con **EmailJS o Nodemailer**.
+Los mensajes enviados a través del formulario son recibidos directamente en mi bandeja de entrada gracias a una integración server-side con **EmailJS**, ejecutada desde una API Route de Next.js.
 
 ### 📄 Descarga de CV
 
@@ -65,6 +67,32 @@ Desde la sección de inicio es posible descargar mi **CV en formato PDF** con un
 ### ⚡ Rendimiento optimizado
 
 Alta puntuación en **Lighthouse** gracias a las optimizaciones de Next.js y la carga diferida de componentes.
+
+---
+
+## ⚙️ Cómo correrlo localmente
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/AntonioMelino/portfolio-web-react.git
+cd portfolio-web-react
+
+# 2. Instalar dependencias
+pnpm install
+
+# 3. Configurar variables de entorno
+# Crear un archivo .env.local en la raíz con:
+# EMAILJS_SERVICE_ID=tu_service_id
+# EMAILJS_TEMPLATE_ID=tu_template_id
+# EMAILJS_PUBLIC_KEY=tu_public_key
+# EMAILJS_PRIVATE_KEY=tu_private_key (opcional, recomendado)
+# EMAIL_TO=tu_email_de_destino
+
+# 4. Levantar el servidor de desarrollo
+pnpm dev
+```
+
+La app queda disponible en `http://localhost:3000`.
 
 ---
 
