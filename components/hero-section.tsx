@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Download, ArrowRight, Mail } from "lucide-react";
+import { Download, ArrowRight, Mail, Check } from "lucide-react";
+
+const EMAIL = "antoniomelino1997@gmail.com";
 
 const SvgGithub = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
@@ -34,6 +36,7 @@ export function HeroSection() {
   const [displayText, setDisplayText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
 
   useEffect(() => {
     const role = roles[roleIndex];
@@ -61,6 +64,16 @@ export function HeroSection() {
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
   };
 
   return (
@@ -158,16 +171,11 @@ export function HeroSection() {
                   icon: <SvgInstagram />,
                   label: "Instagram",
                 },
-                {
-                  href: "mailto:antoniomelino1997@gmail.com",
-                  icon: <Mail className="h-4 w-4" />,
-                  label: "Email",
-                },
               ].map(({ href, icon, label }) => (
                 <a
                   key={label}
                   href={href}
-                  target={href.startsWith("mailto") ? undefined : "_blank"}
+                  target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="p-2 rounded-md border border-border hover:border-primary/50 hover:text-primary text-muted-foreground transition-all duration-200 hover:bg-primary/5"
@@ -175,6 +183,24 @@ export function HeroSection() {
                   {icon}
                 </a>
               ))}
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label={emailCopied ? "Email copiado" : "Copiar email"}
+                title={emailCopied ? "¡Copiado!" : EMAIL}
+                className="relative p-2 rounded-md border border-border hover:border-primary/50 hover:text-primary text-muted-foreground transition-all duration-200 hover:bg-primary/5"
+              >
+                {emailCopied ? (
+                  <Check className="h-4 w-4 text-primary" />
+                ) : (
+                  <Mail className="h-4 w-4" />
+                )}
+                {emailCopied && (
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-xs text-primary bg-card border border-border rounded px-2 py-1">
+                    ¡Copiado!
+                  </span>
+                )}
+              </button>
             </div>
           </div>
 
@@ -205,7 +231,7 @@ export function HeroSection() {
                 {/* Image */}
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image
-                    src="https://res.cloudinary.com/dhwsxp2c8/image/upload/v1778549663/Foto_CV-Antonio-Melino_lulu5q.jpg"
+                    src="https://res.cloudinary.com/dhwsxp2c8/image/upload/v1785791899/Foto_Antonio_Melino_oanthy.jpg"
                     alt="Antonio Melino - Desarrollador Full Stack"
                     width={500}
                     height={625}

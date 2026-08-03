@@ -2,7 +2,9 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Mail, Send, Terminal } from "lucide-react";
+import { Mail, Send, Terminal, Check } from "lucide-react";
+
+const EMAIL = "antoniomelino1997@gmail.com";
 
 const SvgGithub = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
@@ -17,10 +19,25 @@ const SvgLinkedin = () => (
 );
 
 export function ContactSection() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,10 +71,11 @@ export function ContactSection() {
   return (
     <section id="contacto" className="py-24 px-6 scroll-mt-20">
       <div className="container mx-auto max-w-4xl">
-
         {/* Header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 07. contact.tsx</p>
+          <p className="font-mono text-xs text-primary/60 mb-3">
+            // 07. contact.tsx
+          </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Trabajemos Juntos
           </h2>
@@ -67,7 +85,6 @@ export function ContactSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-
           {/* Form — terminal style */}
           <div className="border border-border rounded-xl overflow-hidden bg-card">
             {/* Terminal header */}
@@ -77,23 +94,32 @@ export function ContactSection() {
                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
               </div>
-              <span className="font-mono text-xs text-muted-foreground">send_message.sh</span>
+              <span className="font-mono text-xs text-muted-foreground">
+                send_message.sh
+              </span>
             </div>
 
             <form onSubmit={handleSubmit} className="p-6 space-y-5">
               {/* Name */}
               <div>
-                <label htmlFor="name" className="block font-mono text-xs text-primary/70 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block font-mono text-xs text-primary/70 mb-2"
+                >
                   // nombre
                 </label>
                 <div className="flex items-center gap-2 border border-border rounded-md bg-secondary/40 focus-within:border-primary/60 transition-colors px-3 py-2">
-                  <span className="font-mono text-xs text-primary/50 select-none">$</span>
+                  <span className="font-mono text-xs text-primary/50 select-none">
+                    $
+                  </span>
                   <input
                     id="name"
                     type="text"
                     placeholder="tu_nombre"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     required
                     className="flex-1 bg-transparent font-mono text-sm text-foreground placeholder:text-muted-foreground/50 outline-none"
                   />
@@ -102,17 +128,24 @@ export function ContactSection() {
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block font-mono text-xs text-primary/70 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block font-mono text-xs text-primary/70 mb-2"
+                >
                   // email
                 </label>
                 <div className="flex items-center gap-2 border border-border rounded-md bg-secondary/40 focus-within:border-primary/60 transition-colors px-3 py-2">
-                  <span className="font-mono text-xs text-primary/50 select-none">$</span>
+                  <span className="font-mono text-xs text-primary/50 select-none">
+                    $
+                  </span>
                   <input
                     id="email"
                     type="email"
                     placeholder="tu@email.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     required
                     className="flex-1 bg-transparent font-mono text-sm text-foreground placeholder:text-muted-foreground/50 outline-none"
                   />
@@ -121,18 +154,25 @@ export function ContactSection() {
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block font-mono text-xs text-primary/70 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block font-mono text-xs text-primary/70 mb-2"
+                >
                   // mensaje
                 </label>
                 <div className="border border-border rounded-md bg-secondary/40 focus-within:border-primary/60 transition-colors px-3 py-2">
                   <div className="flex items-start gap-2">
-                    <span className="font-mono text-xs text-primary/50 select-none mt-0.5">$</span>
+                    <span className="font-mono text-xs text-primary/50 select-none mt-0.5">
+                      $
+                    </span>
                     <textarea
                       id="message"
                       placeholder="Contame sobre tu proyecto..."
                       rows={5}
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
                       required
                       className="flex-1 bg-transparent font-mono text-sm text-foreground placeholder:text-muted-foreground/50 outline-none resize-none"
                     />
@@ -174,17 +214,34 @@ export function ContactSection() {
 
           {/* Contact info */}
           <div className="flex flex-col gap-4">
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              aria-label={emailCopied ? "Email copiado" : "Copiar email"}
+              className="flex items-center gap-4 p-5 border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)] transition-all duration-300 group text-left w-full"
+            >
+              <div className="p-2.5 bg-primary/10 rounded-lg flex-shrink-0 group-hover:bg-primary/15 transition-colors text-primary">
+                {emailCopied ? (
+                  <Check className="h-5 w-5" />
+                ) : (
+                  <Mail className="h-5 w-5" />
+                )}
+              </div>
+              <div>
+                <p className="font-mono text-xs text-primary/60 mb-0.5">
+                  Email
+                </p>
+                <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors truncate">
+                  {emailCopied ? "¡Copiado!" : "Clickea para copiar mi email"}
+                </p>
+              </div>
+            </button>
+
             {[
-              {
-                icon: <Mail className="h-5 w-5 text-primary" />,
-                label: "Email",
-                value: "antoniomelino1997@gmail.com",
-                href: "mailto:antoniomelino1997@gmail.com",
-              },
               {
                 icon: <SvgLinkedin />,
                 label: "LinkedIn",
-                value: "antonio-melino-82a885213",
+                value: "Antonio Melino",
                 href: "https://www.linkedin.com/in/antonio-melino-82a885213/",
               },
               {
@@ -197,7 +254,7 @@ export function ContactSection() {
               <a
                 key={label}
                 href={href}
-                target={href.startsWith("mailto") ? undefined : "_blank"}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-5 border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)] transition-all duration-300 group"
               >
@@ -205,7 +262,9 @@ export function ContactSection() {
                   {icon}
                 </div>
                 <div>
-                  <p className="font-mono text-xs text-primary/60 mb-0.5">{label}</p>
+                  <p className="font-mono text-xs text-primary/60 mb-0.5">
+                    {label}
+                  </p>
                   <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors truncate">
                     {value}
                   </p>
@@ -217,13 +276,17 @@ export function ContactSection() {
             <div className="border border-primary/30 rounded-lg p-5 bg-primary/5 mt-2">
               <div className="flex items-center gap-2 mb-3">
                 <Terminal className="h-4 w-4 text-primary" />
-                <span className="font-mono text-xs text-primary">status.sh</span>
+                <span className="font-mono text-xs text-primary">
+                  status.sh
+                </span>
               </div>
               <p className="font-mono text-sm text-foreground mb-1">
-                <span className="text-primary">▸ </span>Disponible para proyectos
+                <span className="text-primary">▸ </span>Disponible para
+                proyectos
               </p>
               <p className="font-mono text-sm text-foreground">
-                <span className="text-primary">▸ </span>Freelance & relación de dependencia
+                <span className="text-primary">▸ </span>Freelance & relación de
+                dependencia
               </p>
             </div>
           </div>
