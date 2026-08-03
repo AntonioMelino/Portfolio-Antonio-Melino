@@ -40,67 +40,91 @@ const FlagGB = () => (
   </svg>
 );
 
+type SkillLevel = "core" | "familiar";
+
+interface Skill {
+  name: string;
+  level: SkillLevel;
+}
+
+const core = (name: string): Skill => ({ name, level: "core" });
+const familiar = (name: string): Skill => ({ name, level: "familiar" });
+
 const skillCategories = [
   {
     key: "frontend",
     title: "Frontend",
     skills: [
-      "React",
-      "Next.js",
-      "JavaScript (ES6+)",
-      "TypeScript",
-      "HTML5",
-      "CSS3",
-      "Tailwind CSS",
-      "Bootstrap",
-      "Material UI",
-      "Responsive Design",
+      core("React"),
+      core("Next.js"),
+      core("JavaScript"),
+      core("TypeScript"),
+      core("HTML5"),
+      core("CSS3"),
+      core("Tailwind CSS"),
+      core("Bootstrap"),
+      core("Material UI"),
+      core("Responsive Design"),
     ],
   },
   {
     key: "backend",
     title: "Backend",
     skills: [
-      "C#",
-      ".NET",
-      "Java",
-      "C++",
-      "Node.js",
-      "REST APIs / RESTful",
-      "JWT / Autenticación",
+      core("C#"),
+      core(".NET"),
+      familiar("Java"),
+      familiar("C++"),
+      core("Node.js"),
+      core("Express.js"),
+      core("REST APIs / RESTful"),
+      core("JWT / Autenticación"),
     ],
   },
   {
     key: "database",
     title: "Base de Datos",
     skills: [
-      "PostgreSQL (Supabase)",
-      "Firebase (Firestore)",
-      "SQL",
-      "MySQL",
-      "Entity Framework (ORM)",
+      core("PostgreSQL (Supabase)"),
+      familiar("Firebase (Firestore)"),
+      core("SQL"),
+      familiar("MySQL"),
+      core("Entity Framework (ORM)"),
     ],
   },
   {
     key: "devops",
     title: "DevOps & Cloud",
-    skills: ["Git", "GitHub", "Vercel", "Docker", "AWS", "Azure", "Railway"],
+    skills: [
+      core("Git"),
+      core("GitHub"),
+      core("Vercel"),
+      familiar("Docker"),
+      familiar("AWS"),
+      familiar("Azure"),
+      core("Railway"),
+    ],
   },
   {
     key: "ai",
     title: "IA & Dev Tools",
-    skills: ["Claude Code", "DeepSeek", "GitHub Copilot"],
+    skills: [
+      core("Claude Code"),
+      familiar("DeepSeek"),
+      familiar("GitHub Copilot"),
+      core("Kimi AI"),
+    ],
   },
   {
     key: "soft",
     title: "Metodologías",
     skills: [
-      "Agile",
-      "Scrum",
-      "GitHub Projects",
-      "POO",
-      "Trabajo colaborativo",
-      "Resolución de problemas",
+      core("Agile"),
+      core("Scrum"),
+      core("GitHub Projects"),
+      core("POO"),
+      core("Trabajo colaborativo"),
+      core("Resolución de problemas"),
     ],
   },
 ];
@@ -141,44 +165,71 @@ export function SkillsSection() {
 
         {/* Skills grid — code block style */}
         <div className="grid min-[400px]:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillCategories.map((category) => (
-            <div
-              key={category.key}
-              className="border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 overflow-hidden"
-            >
-              {/* Card header */}
-              <div className="px-5 py-3 sm:py-4 border-b border-border bg-secondary/40">
-                <div className="font-mono text-sm">
-                  <span className="text-primary/70">const </span>
-                  <span className="text-foreground font-semibold">
-                    {category.key}
-                  </span>
-                  <span className="text-muted-foreground"> = [</span>
-                </div>
-              </div>
+          {skillCategories.map((category) => {
+            const coreSkills = category.skills.filter(
+              (skill) => skill.level === "core",
+            );
+            const familiarSkills = category.skills.filter(
+              (skill) => skill.level === "familiar",
+            );
 
-              {/* Skills */}
-              <div className="px-5 py-3 sm:py-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="font-mono text-xs px-2 py-1 border border-primary/20 text-primary/80 bg-primary/5 rounded hover:border-primary/50 hover:text-primary hover:bg-primary/10 transition-all duration-150 cursor-default"
-                    >
-                      &quot;{skill}&quot;
+            return (
+              <div
+                key={category.key}
+                className="border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_25px_rgba(0,212,255,0.08)] transition-all duration-300 overflow-hidden"
+              >
+                {/* Card header */}
+                <div className="px-5 py-3 sm:py-4 border-b border-border bg-secondary/40">
+                  <div className="font-mono text-sm">
+                    <span className="text-primary/70">const </span>
+                    <span className="text-foreground font-semibold">
+                      {category.key}
                     </span>
-                  ))}
+                    <span className="text-muted-foreground"> = [</span>
+                  </div>
+                </div>
+
+                {/* Skills */}
+                <div className="px-5 py-3 sm:py-4 space-y-3">
+                  <div className="flex flex-wrap gap-1.5">
+                    {coreSkills.map((skill) => (
+                      <span
+                        key={skill.name}
+                        className="font-mono text-xs px-2 py-1 border border-primary/20 text-primary/80 bg-primary/5 rounded hover:border-primary/50 hover:text-primary hover:bg-primary/10 transition-all duration-150 cursor-default"
+                      >
+                        &quot;{skill.name}&quot;
+                      </span>
+                    ))}
+                  </div>
+
+                  {familiarSkills.length > 0 && (
+                    <div>
+                      <p className="font-mono text-[11px] text-muted-foreground/60 mb-1.5">
+                        // conocimientos
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {familiarSkills.map((skill) => (
+                          <span
+                            key={skill.name}
+                            className="font-mono text-xs px-2 py-1 border border-dashed border-border text-muted-foreground/60 rounded hover:border-primary/30 hover:text-muted-foreground transition-all duration-150 cursor-default"
+                          >
+                            &quot;{skill.name}&quot;
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Closing bracket */}
+                <div className="px-5 pb-3 sm:pb-4">
+                  <span className="font-mono text-sm text-muted-foreground">
+                    ]
+                  </span>
                 </div>
               </div>
-
-              {/* Closing bracket */}
-              <div className="px-5 pb-3 sm:pb-4">
-                <span className="font-mono text-sm text-muted-foreground">
-                  ]
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Extra badges */}
