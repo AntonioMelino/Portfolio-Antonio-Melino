@@ -95,7 +95,7 @@ export function ContactSection() {
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
               </div>
               <span className="font-mono text-xs text-muted-foreground">
-                send_message.sh
+                enviar_mensaje.sh
               </span>
             </div>
 
@@ -194,7 +194,7 @@ export function ContactSection() {
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    {">"} send_message()
+                    {">"} enviar_mensaje()
                   </>
                 )}
               </button>
@@ -277,7 +277,7 @@ export function ContactSection() {
               <div className="flex items-center gap-2 mb-3">
                 <Terminal className="h-4 w-4 text-primary" />
                 <span className="font-mono text-xs text-primary">
-                  status.sh
+                  estado.sh
                 </span>
               </div>
               <p className="font-mono text-sm text-foreground mb-1">

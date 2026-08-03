@@ -299,7 +299,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
               className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
             >
               <SvgGithub />
-              source
+              código
             </a>
           )}
         </div>
@@ -351,7 +351,7 @@ export function ProjectsSection() {
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 02. projects/
+            // 02. proyectos/
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Proyectos</h2>
           <p className="text-lg text-muted-foreground">
@@ -365,7 +365,7 @@ export function ProjectsSection() {
             {/* Featured label */}
             <div className="flex items-center gap-2 mb-3">
               <p className="font-mono text-xs text-primary/60">
-                // featured.project
+                // destacado.project
               </p>
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
                 <Star className="h-3 w-3 text-primary fill-primary" />
@@ -484,7 +484,7 @@ export function ProjectsSection() {
                       className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
                     >
                       <SvgGithub />
-                      source
+                      código
                     </a>
                   )}
                 </div>
@@ -582,7 +582,7 @@ export function ProjectsSection() {
                         >
                           <Image
                             src={src}
-                            alt={`${selectedProject.title} screenshot ${index + 1}`}
+                            alt={`Captura de pantalla ${index + 1} de ${selectedProject.title}`}
                             fill
                             className="object-contain"
                             sizes="100vw"
@@ -621,7 +621,7 @@ export function ProjectsSection() {
                       className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
                     >
                       <SvgGithub />
-                      source
+                      código
                     </a>
                   )}
                 </div>

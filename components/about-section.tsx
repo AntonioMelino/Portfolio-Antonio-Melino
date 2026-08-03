@@ -63,7 +63,7 @@ export function AboutSection() {
 
         {/* Section header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 06. about_me.tsx</p>
+          <p className="font-mono text-xs text-primary/60 mb-3">// 06. sobre_mi.tsx</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Sobre Mí
           </h2>
@@ -108,7 +108,7 @@ export function AboutSection() {
                 },
                 {
                   icon: <Users className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
-                  title: "Soft Skills",
+                  title: "Habilidades Blandas",
                   text: "Comunicación efectiva, resolución de problemas, trabajo en equipo y adaptabilidad.",
                 },
               ].map(({ icon, title, text }) => (

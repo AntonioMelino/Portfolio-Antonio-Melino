@@ -140,7 +140,7 @@ export function ExperienceSection() {
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 04. experience.ts
+            // 04. experiencia.ts
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Experiencia</h2>
           <p className="text-lg text-muted-foreground">
