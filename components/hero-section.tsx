@@ -26,9 +26,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 const roles = [
-  "Full Stack Developer",
-  "React & Next.js Dev",
-  ".NET & C# Dev",
+  "Desarrollador Full Stack",
+  "Desarrollador React & Next.js",
+  "Desarrollador .NET & C#",
   "APIs RESTful & JWT",
 ];
 
@@ -92,7 +92,7 @@ export function HeroSection() {
           {/* Left — Text content */}
           <div className="space-y-6 animate-fade-up">
             {/* File label */}
-            <p className="font-mono text-xs text-primary/60">// 01. hero.tsx</p>
+            <p className="font-mono text-xs text-primary/60">// 01. inicio.tsx</p>
 
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 rounded-full bg-primary/5">
@@ -240,13 +240,13 @@ export function HeroSection() {
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6">
                     <p className="font-mono text-xs text-primary/70 mb-1">
-                      // developer.info
+                      // desarrollador.info
                     </p>
                     <h3 className="text-white text-xl font-bold">
                       Antonio Melino
                     </h3>
                     <p className="font-mono text-white/60 text-xs mt-0.5">
-                      Full Stack Developer
+                      Desarrollador Full Stack
                     </p>
                   </div>
                 </div>

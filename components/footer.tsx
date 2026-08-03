@@ -6,12 +6,12 @@ export function Footer() {
           <p className="font-mono text-sm text-muted-foreground">
             <span className="text-primary">antonio@portfolio</span>
             <span className="text-muted-foreground">:~$ </span>
-            <span className="text-foreground">exit</span>
+            <span className="text-foreground">salir</span>
             <span className="text-primary cursor-blink ml-1">▌</span>
           </p>
           <p className="font-mono text-xs text-muted-foreground">
             <span className="text-primary/50">// </span>
-            built with Next.js & Tailwind — <span className="text-primary/50">©</span> 2025 Antonio Melino
+            hecho con Next.js & Tailwind — <span className="text-primary/50">©</span> 2025 Antonio Melino
           </p>
         </div>
       </div>

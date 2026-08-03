@@ -107,7 +107,7 @@ const skillCategories = [
   },
   {
     key: "ai",
-    title: "IA & Dev Tools",
+    title: "IA & Herramientas de Desarrollo",
     skills: [
       core("Claude Code"),
       familiar("DeepSeek"),
@@ -136,7 +136,7 @@ export function SkillsSection() {
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 03. skills.config.ts
+            // 03. tecnologias.config.ts
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Stack Tecnológico
@@ -234,7 +234,7 @@ export function SkillsSection() {
 
         {/* Extra badges */}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {["CI/CD", "Seguridad en APIs", "Code Review", "Clean Code"].map(
+          {["CI/CD", "Seguridad en APIs", "Revisión de Código", "Clean Code"].map(
             (badge) => (
               <span
                 key={badge}
