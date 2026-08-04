@@ -3,6 +3,8 @@
 import type React from "react";
 import { useState } from "react";
 import { Mail, Send, Terminal, Check } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
 
 const EMAIL = "antoniomelino1997@gmail.com";
 
@@ -19,14 +21,16 @@ const SvgLinkedin = () => (
 );
 
 export function ContactSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
 
   const handleCopyEmail = async () => {
@@ -42,8 +46,8 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess("");
-    setError("");
+    setSuccess(false);
+    setError(false);
 
     try {
       const res = await fetch("/api/contact", {
@@ -51,18 +55,17 @@ export function ContactSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Error al enviar el mensaje.");
+        setError(true);
         return;
       }
 
-      setSuccess("¡Mensaje enviado correctamente!");
+      setSuccess(true);
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
       console.error(err);
-      setError("Hubo un error al enviar el mensaje.");
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -74,13 +77,13 @@ export function ContactSection() {
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 07. contact.tsx
+            {t.contact.fileComment}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Trabajemos Juntos
+            {t.contact.title}
           </h2>
           <p className="text-lg text-muted-foreground">
-            ¿Tenés un proyecto en mente? Me encantaría escuchar sobre él
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -95,7 +98,7 @@ export function ContactSection() {
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
               </div>
               <span className="font-mono text-xs text-muted-foreground">
-                enviar_mensaje.sh
+                {t.contact.terminalFilename}
               </span>
             </div>
 
@@ -106,7 +109,7 @@ export function ContactSection() {
                   htmlFor="name"
                   className="block font-mono text-xs text-primary/70 mb-2"
                 >
-                  // nombre
+                  {t.contact.labelName}
                 </label>
                 <div className="flex items-center gap-2 border border-border rounded-md bg-secondary/40 focus-within:border-primary/60 transition-colors px-3 py-2">
                   <span className="font-mono text-xs text-primary/50 select-none">
@@ -115,7 +118,7 @@ export function ContactSection() {
                   <input
                     id="name"
                     type="text"
-                    placeholder="tu_nombre"
+                    placeholder={t.contact.placeholderName}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -132,7 +135,7 @@ export function ContactSection() {
                   htmlFor="email"
                   className="block font-mono text-xs text-primary/70 mb-2"
                 >
-                  // email
+                  {t.contact.labelEmail}
                 </label>
                 <div className="flex items-center gap-2 border border-border rounded-md bg-secondary/40 focus-within:border-primary/60 transition-colors px-3 py-2">
                   <span className="font-mono text-xs text-primary/50 select-none">
@@ -141,7 +144,7 @@ export function ContactSection() {
                   <input
                     id="email"
                     type="email"
-                    placeholder="tu@email.com"
+                    placeholder={t.contact.placeholderEmail}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -158,7 +161,7 @@ export function ContactSection() {
                   htmlFor="message"
                   className="block font-mono text-xs text-primary/70 mb-2"
                 >
-                  // mensaje
+                  {t.contact.labelMessage}
                 </label>
                 <div className="border border-border rounded-md bg-secondary/40 focus-within:border-primary/60 transition-colors px-3 py-2">
                   <div className="flex items-start gap-2">
@@ -167,7 +170,7 @@ export function ContactSection() {
                     </span>
                     <textarea
                       id="message"
-                      placeholder="Contame sobre tu proyecto..."
+                      placeholder={t.contact.placeholderMessage}
                       rows={5}
                       value={formData.message}
                       onChange={(e) =>
@@ -189,24 +192,24 @@ export function ContactSection() {
                 {loading ? (
                   <>
                     <span className="cursor-blink">▌</span>
-                    ejecutando...
+                    {t.contact.sending}
                   </>
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    {">"} enviar_mensaje()
+                    {">"} {t.contact.submit}
                   </>
                 )}
               </button>
 
               {success && (
                 <p className="font-mono text-xs text-primary text-center">
-                  ✓ {success}
+                  ✓ {t.contact.successMsg}
                 </p>
               )}
               {error && (
                 <p className="font-mono text-xs text-destructive text-center">
-                  ✗ {error}
+                  ✗ {t.contact.errorMsg}
                 </p>
               )}
             </form>
@@ -217,7 +220,7 @@ export function ContactSection() {
             <button
               type="button"
               onClick={handleCopyEmail}
-              aria-label={emailCopied ? "Email copiado" : "Copiar email"}
+              aria-label={emailCopied ? t.contact.ariaEmailCopied : t.contact.ariaEmailCopy}
               className="flex items-center gap-4 p-5 border border-border rounded-lg bg-card hover:border-primary/40 hover:shadow-[0_0_20px_rgba(0,212,255,0.08)] transition-all duration-300 group text-left w-full"
             >
               <div className="p-2.5 bg-primary/10 rounded-lg flex-shrink-0 group-hover:bg-primary/15 transition-colors text-primary">
@@ -229,10 +232,10 @@ export function ContactSection() {
               </div>
               <div>
                 <p className="font-mono text-xs text-primary/60 mb-0.5">
-                  Email
+                  {t.contact.emailLabel}
                 </p>
                 <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors truncate">
-                  {emailCopied ? "¡Copiado!" : "Clickea para copiar mi email"}
+                  {emailCopied ? t.contact.emailCopied : t.contact.emailCta}
                 </p>
               </div>
             </button>
@@ -277,16 +280,14 @@ export function ContactSection() {
               <div className="flex items-center gap-2 mb-3">
                 <Terminal className="h-4 w-4 text-primary" />
                 <span className="font-mono text-xs text-primary">
-                  estado.sh
+                  {t.contact.statusFilename}
                 </span>
               </div>
               <p className="font-mono text-sm text-foreground mb-1">
-                <span className="text-primary">▸ </span>Disponible para
-                proyectos
+                <span className="text-primary">▸ </span>{t.contact.statusAvailable}
               </p>
               <p className="font-mono text-sm text-foreground">
-                <span className="text-primary">▸ </span>Freelance & relación de
-                dependencia
+                <span className="text-primary">▸ </span>{t.contact.statusFreelance}
               </p>
             </div>
           </div>

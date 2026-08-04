@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Code2,
   Database,
@@ -9,66 +11,66 @@ import {
   BookOpen,
   Sparkles,
 } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
 
-const capabilityCards = [
-  {
-    icon: <Code2 className="h-6 w-6 text-primary" />,
-    title: "Frontend Moderno",
-    badge: "Especialidad",
-    description:
-      "React, Next.js, TypeScript, Tailwind CSS. Interfaces intuitivas y accesibles con deploys en Vercel.",
-    tags: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    icon: <Database className="h-6 w-6 text-primary" />,
-    title: "Backend Sólido",
-    description:
-      "Ecosistema Microsoft con .NET y C#, APIs RESTful con autenticación JWT, Firebase y SQL.",
-    tags: [".NET", "C#", "Firebase", "SQL", "JWT"],
-  },
-  {
-    icon: <Cloud className="h-6 w-6 text-primary" />,
-    title: "DevOps & Cloud",
-    description:
-      "Deploy continuo con Vercel y Firebase, contenedores Docker, familiaridad con AWS y Azure.",
-    tags: ["Docker", "Vercel", "AWS", "Azure", "CI/CD"],
-  },
+const capabilityIcons = [
+  <Code2 key="frontend" className="h-6 w-6 text-primary" />,
+  <Database key="backend" className="h-6 w-6 text-primary" />,
+  <Cloud key="devops" className="h-6 w-6 text-primary" />,
 ];
 
-const valueCards = [
-  {
-    icon: <Bot className="h-5 w-5 text-primary" />,
-    title: "IA integrada al flujo",
-    description:
-      "Claude Code, GitHub Copilot y otras herramientas de IA directamente en el IDE para desarrollar más rápido.",
-  },
-  {
-    icon: <Rocket className="h-5 w-5 text-primary" />,
-    title: "Orientado a resultados",
-    description:
-      "Proyectos con deploy real y funcionalidad completa. En mi trabajo automaticé tareas que me dieron visión de procesos.",
-  },
-  {
-    icon: <Users className="h-5 w-5 text-primary" />,
-    title: "Colaborador y metódico",
-    description:
-      "Experiencia con Agile y Scrum. Enfoque en estructura, legibilidad y mantenibilidad del código en equipo.",
-  },
+const capabilityTags = [
+  ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+  [".NET", "C#", "Firebase", "SQL", "JWT"],
+  ["Docker", "Vercel", "AWS", "Azure", "CI/CD"],
+];
+
+const valueIcons = [
+  <Bot key="ai" className="h-5 w-5 text-primary" />,
+  <Rocket key="results" className="h-5 w-5 text-primary" />,
+  <Users key="team" className="h-5 w-5 text-primary" />,
+];
+
+const objectiveIcons = [
+  <Target key="goal" className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
+  <BookOpen key="evolving" className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
+  <Users key="soft" className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
 ];
 
 export function AboutSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const capabilityCards = t.about.capabilityCards.map((card, i) => ({
+    ...card,
+    icon: capabilityIcons[i],
+    tags: capabilityTags[i],
+    badge: i === 0 ? t.about.specialtyBadge : undefined,
+  }));
+
+  const valueCards = t.about.valueCards.map((card, i) => ({
+    ...card,
+    icon: valueIcons[i],
+  }));
+
+  const objectives = t.about.objectives.map((item, i) => ({
+    ...item,
+    icon: objectiveIcons[i],
+  }));
+
   return (
     <section id="sobre-mi" className="py-24 px-6 scroll-mt-20 bg-secondary/20">
       <div className="container mx-auto max-w-6xl">
 
         {/* Section header */}
         <div className="mb-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// 06. sobre_mi.tsx</p>
+          <p className="font-mono text-xs text-primary/60 mb-3">{t.about.fileComment}</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Sobre Mí
+            {t.about.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Formación sólida, proyectos reales y experiencia en entornos laborales tecnológicos
+            {t.about.subtitle}
           </p>
         </div>
 
@@ -80,38 +82,19 @@ export function AboutSection() {
             <div>
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <span className="font-mono text-primary text-sm">{"{"}</span>
-                Mi Historia
+                {t.about.storyHeading}
                 <span className="font-mono text-primary text-sm">{"}"}</span>
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Trabajo con tecnología desde hace años en entornos laborales reales, lo que me dio
-                una perspectiva práctica que va más allá del código: entender procesos, detectar
-                problemas y proponer soluciones concretas.
+                {t.about.storyP1}
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Paralelamente fui construyendo mi stack como desarrollador full stack a través de la
-                UTN, Coderhouse, certificaciones Microsoft y proyectos propios llevados a producción.
+                {t.about.storyP2}
               </p>
             </div>
 
             <div className="space-y-4 pt-2">
-              {[
-                {
-                  icon: <Target className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
-                  title: "Mi Objetivo",
-                  text: "Integrarme a un equipo donde pueda aportar desde el día uno, colaborar con profesionales de alto nivel y seguir creciendo como desarrollador full stack.",
-                },
-                {
-                  icon: <BookOpen className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
-                  title: "En Constante Evolución",
-                  text: "Actualmente cursando el Certificado Profesional Microsoft Full-Stack Developer, con foco en .NET Core, Azure, CI/CD y arquitecturas escalables.",
-                },
-                {
-                  icon: <Users className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />,
-                  title: "Habilidades Blandas",
-                  text: "Comunicación efectiva, resolución de problemas, trabajo en equipo y adaptabilidad.",
-                },
-              ].map(({ icon, title, text }) => (
+              {objectives.map(({ icon, title, text }) => (
                 <div key={title} className="flex items-start gap-3 pl-4 border-l border-primary/30">
                   {icon}
                   <div>
@@ -165,8 +148,8 @@ export function AboutSection() {
 
         {/* Values */}
         <div className="border-t border-border pt-14">
-          <p className="font-mono text-xs text-primary/60 mb-3">// lo_que_me_define</p>
-          <h3 className="text-2xl font-bold mb-8">Lo que me define</h3>
+          <p className="font-mono text-xs text-primary/60 mb-3">{t.about.definesFileComment}</p>
+          <h3 className="text-2xl font-bold mb-8">{t.about.definesHeading}</h3>
           <div className="grid md:grid-cols-3 gap-5">
             {valueCards.map((card) => (
               <div
@@ -188,14 +171,14 @@ export function AboutSection() {
         {/* CTA */}
         <div className="text-center mt-14 pt-10 border-t border-border">
           <p className="text-muted-foreground mb-6">
-            ¿Buscás un desarrollador full stack con formación sólida, proyectos en producción y visión de negocio?
+            {t.about.ctaText}
           </p>
           <a
             href="#contacto"
             className="inline-flex items-center gap-2 px-6 py-3 border border-primary text-primary rounded-lg font-mono text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-200"
           >
             <Sparkles className="h-4 w-4" />
-            hablemos()
+            {t.about.ctaButton}
           </a>
         </div>
       </div>

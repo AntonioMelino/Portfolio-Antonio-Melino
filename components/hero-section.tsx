@@ -24,15 +24,13 @@ const SvgInstagram = () => (
 );
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-const roles = [
-  "Desarrollador Full Stack",
-  "Desarrollador React & Next.js",
-  "Desarrollador .NET & C#",
-  "APIs RESTful & JWT",
-];
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
 
 export function HeroSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const roles = t.hero.roles;
   const [displayText, setDisplayText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -60,7 +58,7 @@ export function HeroSection() {
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, roleIndex]);
+  }, [displayText, isDeleting, roleIndex, roles]);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -92,13 +90,13 @@ export function HeroSection() {
           {/* Left — Text content */}
           <div className="space-y-6 animate-fade-up">
             {/* File label */}
-            <p className="font-mono text-xs text-primary/60">// 01. inicio.tsx</p>
+            <p className="font-mono text-xs text-primary/60">{t.hero.fileComment}</p>
 
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-primary/30 rounded-full bg-primary/5">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="font-mono text-xs text-primary">
-                disponible para nuevos proyectos
+                {t.hero.badge}
               </span>
             </div>
 
@@ -127,8 +125,7 @@ export function HeroSection() {
 
             {/* Description */}
             <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Desarrollador con base académica y enfoque autodidacta, motivado
-              por crecer y aportar en el entorno IT.
+              {t.hero.description}
             </p>
 
             {/* CTAs */}
@@ -138,7 +135,7 @@ export function HeroSection() {
                 onClick={() => scrollToSection("proyectos")}
                 className="group font-mono gap-2"
               >
-                ver_proyectos()
+                {t.hero.ctaProjects}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <a href="/Antonio_Melino_CV.pdf" download>
@@ -148,7 +145,7 @@ export function HeroSection() {
                   className="group font-mono gap-2 border-border hover:border-primary/60 bg-transparent dark:hover:bg-primary/10 dark:hover:text-primary"
                 >
                   <Download className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                  descargar_cv
+                  {t.hero.ctaCV}
                 </Button>
               </a>
             </div>
@@ -186,8 +183,10 @@ export function HeroSection() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                aria-label={emailCopied ? "Email copiado" : "Copiar email"}
-                title={emailCopied ? "¡Copiado!" : EMAIL}
+                aria-label={
+                  emailCopied ? t.hero.ariaEmailCopied : t.hero.ariaEmailDefault
+                }
+                title={emailCopied ? t.hero.copiedTooltip : EMAIL}
                 className="relative p-2 rounded-md border border-border hover:border-primary/50 hover:text-primary text-muted-foreground transition-all duration-200 hover:bg-primary/5"
               >
                 {emailCopied ? (
@@ -197,7 +196,7 @@ export function HeroSection() {
                 )}
                 {emailCopied && (
                   <span className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-xs text-primary bg-card border border-border rounded px-2 py-1">
-                    ¡Copiado!
+                    {t.hero.copiedTooltip}
                   </span>
                 )}
               </button>
@@ -240,13 +239,13 @@ export function HeroSection() {
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6">
                     <p className="font-mono text-xs text-primary/70 mb-1">
-                      // desarrollador.info
+                      {t.hero.photoFileComment}
                     </p>
                     <h3 className="text-white text-xl font-bold">
                       Antonio Melino
                     </h3>
                     <p className="font-mono text-white/60 text-xs mt-0.5">
-                      Desarrollador Full Stack
+                      {t.hero.photoRole}
                     </p>
                   </div>
                 </div>
@@ -271,7 +270,7 @@ export function HeroSection() {
         {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
           <span className="font-mono text-xs text-muted-foreground">
-            scroll
+            {t.hero.scrollHint}
           </span>
           <div className="w-px h-8 bg-gradient-to-b from-primary to-transparent" />
         </div>

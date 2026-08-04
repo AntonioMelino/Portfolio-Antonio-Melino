@@ -6,6 +6,8 @@ import { ExternalLink, Images, Star } from "lucide-react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
 import {
   Dialog,
   DialogContent,
@@ -32,7 +34,7 @@ const SvgGithub = () => (
 interface Project {
   title: string;
   slug: string;
-  description: string;
+  description: { es: string; en: string };
   image: string;
   gif: string;
   tags: string[];
@@ -48,8 +50,10 @@ const projects: Project[] = [
     title: "Vencix",
     slug: "vencix",
     featured: true,
-    description:
-      "Sistema web interno fullstack para Maxiconsumo S.A. que centraliza el control de productos próximos a vencer con roles admin/empleado, autocompletado de 8.500 artículos por código de barras, notificaciones en tiempo real y PWA instalable. Gestionado con GitHub Projects.",
+    description: {
+      es: "Sistema web interno fullstack para Maxiconsumo S.A. que centraliza el control de productos próximos a vencer con roles admin/empleado, autocompletado de 8.500 artículos por código de barras, notificaciones en tiempo real y PWA instalable. Gestionado con GitHub Projects.",
+      en: "Full stack internal web system for Maxiconsumo S.A. that centralizes control of products nearing expiration, with admin/employee roles, barcode autocomplete across 8,500 items, real-time notifications and an installable PWA. Managed with GitHub Projects.",
+    },
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548344/Vencix_-_pantalla_de_inicio_xvsakp.png",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1781548347/Vencix-gif_crbira.gif",
@@ -82,8 +86,10 @@ const projects: Project[] = [
   {
     title: "Bitácora",
     slug: "bitacora",
-    description:
-      "PWA fullstack de organización de viajes: gestión de gastos multi-moneda, itinerario diario, checklist, alojamientos, ciudades con lugares para visitar y opciones de SIM/eSIM para viajes internacionales. Incluye exportación a Excel, asistente de IA integrado y soporte offline completo.",
+    description: {
+      es: "PWA fullstack de organización de viajes: gestión de gastos multi-moneda, itinerario diario, checklist, alojamientos, ciudades con lugares para visitar y opciones de SIM/eSIM para viajes internacionales. Incluye exportación a Excel, asistente de IA integrado y soporte offline completo.",
+      en: "Full stack travel-planning PWA: multi-currency expense tracking, daily itinerary, checklists, accommodations, cities with places to visit, and SIM/eSIM options for international trips. Includes Excel export, a built-in AI assistant and full offline support.",
+    },
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076972/Bitacora_-_pantalla_de_inicio_xi6cxz.png",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1784076944/Bitacora_-_gif_k9z2op.gif",
@@ -116,8 +122,10 @@ const projects: Project[] = [
   {
     title: "Techos Nass",
     slug: "techos_nass",
-    description:
-      "Web moderna y responsive para negocio de techos. Incluye Google Maps, opiniones de clientes y contacto directo vía WhatsApp.",
+    description: {
+      es: "Web moderna y responsive para negocio de techos. Incluye Google Maps, opiniones de clientes y contacto directo vía WhatsApp.",
+      en: "Modern, responsive website for a roofing business. Includes Google Maps, customer reviews and direct WhatsApp contact.",
+    },
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767298290/Techos-Nass-foto_wtvu2e.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1767299163/Techos-Nass-gif_me8rd1.gif",
@@ -145,8 +153,10 @@ const projects: Project[] = [
   {
     title: "Mi cuaderno de idiomas",
     slug: "mi_cuaderno_de_idiomas",
-    description:
-      "Landing page personal para centralizar el aprendizaje de idiomas: writings corregidos y apuntes de gramática/vocabulario organizados por idioma y nivel (A1 → C1), con progreso desbloqueable y arquitectura escalable a nuevos idiomas.",
+    description: {
+      es: "Landing page personal para centralizar el aprendizaje de idiomas: writings corregidos y apuntes de gramática/vocabulario organizados por idioma y nivel (A1 → C1), con progreso desbloqueable y arquitectura escalable a nuevos idiomas.",
+      en: "Personal landing page to centralize language learning: corrected writings and grammar/vocabulary notes organized by language and level (A1 → C1), with unlockable progress and an architecture that scales to new languages.",
+    },
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783983857/Mi_cuaderno_de_idiomas_-_pantalla_de_inicio_kt65wg.png",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1783984299/Mi_cuaderno_de_idiomas_-_gif_x2l7pc.gif",
@@ -169,8 +179,10 @@ const projects: Project[] = [
   {
     title: "Gamer Zone App",
     slug: "gamer_zone_app",
-    description:
-      "Tienda online de productos gamer con React, Firebase y MUI. Catálogo, filtros por categoría, carrito de compras y autenticación de usuarios.",
+    description: {
+      es: "Tienda online de productos gamer con React, Firebase y MUI. Catálogo, filtros por categoría, carrito de compras y autenticación de usuarios.",
+      en: "Online store for gaming products built with React, Firebase and MUI. Catalog, category filters, shopping cart and user authentication.",
+    },
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1765743839/GamerZoneApp-foto_ntqau6.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442488/GamerZoneApp-gif_eszq7w.gif",
@@ -192,8 +204,10 @@ const projects: Project[] = [
   {
     title: "Verificador de Fotos",
     slug: "verificador_fotos",
-    description:
-      "App para EMA Servicios de auditoría de imágenes: carga, detección de desvíos y gestión de resultados. Conversión PDF→JPG, filtrado aleatorio y exportación a Excel.",
+    description: {
+      es: "App para EMA Servicios de auditoría de imágenes: carga, detección de desvíos y gestión de resultados. Conversión PDF→JPG, filtrado aleatorio y exportación a Excel.",
+      en: "Image-auditing app built for EMA Servicios: uploads, deviation detection and results management. PDF→JPG conversion, random filtering and Excel export.",
+    },
     image:
       "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442668/EMA-foto_lgcpjo.jpg",
     gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1766442779/EMA-gif_eqz9vg.gif",
@@ -214,6 +228,9 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, onSelect }: ProjectCardProps) {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <div
       onClick={() => onSelect(project)}
@@ -250,7 +267,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
         <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Images className="h-3 w-3 text-primary" />
           <span className="font-mono text-[10px] text-primary">
-            galería
+            {t.projects.galleryLabel}
           </span>
         </div>
       </div>
@@ -261,7 +278,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
           {project.title}
         </h3>
         <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-1">
-          {project.description}
+          {project.description[language]}
         </p>
 
         {/* Tags */}
@@ -299,7 +316,7 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
               className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
             >
               <SvgGithub />
-              código
+              {t.projects.codeLabel}
             </a>
           )}
         </div>
@@ -309,6 +326,8 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
 }
 
 export function ProjectsSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const isMobile = useIsMobile();
 
@@ -351,11 +370,11 @@ export function ProjectsSection() {
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 02. proyectos/
+            {t.projects.fileComment}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Proyectos</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.projects.title}</h2>
           <p className="text-lg text-muted-foreground">
-            Una selección de proyectos en producción
+            {t.projects.subtitle}
           </p>
         </div>
 
@@ -365,12 +384,12 @@ export function ProjectsSection() {
             {/* Featured label */}
             <div className="flex items-center gap-2 mb-3">
               <p className="font-mono text-xs text-primary/60">
-                // destacado.project
+                {t.projects.featuredFileComment}
               </p>
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
                 <Star className="h-3 w-3 text-primary fill-primary" />
                 <span className="font-mono text-[10px] text-primary">
-                  proyecto destacado
+                  {t.projects.featuredBadgeMobile}
                 </span>
               </div>
             </div>
@@ -413,7 +432,7 @@ export function ProjectsSection() {
                 <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Images className="h-3 w-3 text-primary" />
                   <span className="font-mono text-[10px] text-primary">
-                    galería
+                    {t.projects.galleryLabel}
                   </span>
                 </div>
               </div>
@@ -435,7 +454,7 @@ export function ProjectsSection() {
                   <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30">
                     <Star className="h-3 w-3 text-primary fill-primary" />
                     <span className="font-mono text-[10px] text-primary">
-                      destacado
+                      {t.projects.featuredBadgeDesktop}
                     </span>
                   </div>
                 </div>
@@ -445,7 +464,7 @@ export function ProjectsSection() {
                     {featuredProject.title}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-                    {featuredProject.description}
+                    {featuredProject.description[language]}
                   </p>
 
                   {/* Tags */}
@@ -484,7 +503,7 @@ export function ProjectsSection() {
                       className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
                     >
                       <SvgGithub />
-                      código
+                      {t.projects.codeLabel}
                     </a>
                   )}
                 </div>
@@ -527,7 +546,7 @@ export function ProjectsSection() {
               <button
                 key={otherProjects[index].title}
                 type="button"
-                aria-label={`Ir al proyecto ${index + 1}`}
+                aria-label={t.projects.goToProject(index + 1)}
                 aria-current={index === mobileCurrent}
                 onClick={() => mobileApi?.scrollTo(index)}
                 className={cn(
@@ -582,7 +601,7 @@ export function ProjectsSection() {
                         >
                           <Image
                             src={src}
-                            alt={`Captura de pantalla ${index + 1} de ${selectedProject.title}`}
+                            alt={t.projects.screenshotAlt(index + 1, selectedProject.title)}
                             fill
                             className="object-contain"
                             sizes="100vw"
@@ -599,7 +618,7 @@ export function ProjectsSection() {
               {/* Description + Links — footer compacto */}
               <div className="flex-shrink-0 mt-3 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <p className="text-sm text-muted-foreground leading-relaxed md:max-w-2xl">
-                  {selectedProject.description}
+                  {selectedProject.description[language]}
                 </p>
                 <div className="flex gap-3 flex-shrink-0">
                   {selectedProject.demo !== "#" && (
@@ -621,7 +640,7 @@ export function ProjectsSection() {
                       className="inline-flex items-center gap-1.5 px-4 py-2 border border-border rounded-md font-mono text-xs text-muted-foreground hover:border-primary/50 hover:text-primary transition-all"
                     >
                       <SvgGithub />
-                      código
+                      {t.projects.codeLabel}
                     </a>
                   )}
                 </div>

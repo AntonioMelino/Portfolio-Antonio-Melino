@@ -1,4 +1,12 @@
+"use client";
+
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
+
 export function Footer() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <footer className="py-8 px-6 border-t border-border">
       <div className="container mx-auto max-w-6xl">
@@ -6,12 +14,12 @@ export function Footer() {
           <p className="font-mono text-sm text-muted-foreground">
             <span className="text-primary">antonio@portfolio</span>
             <span className="text-muted-foreground">:~$ </span>
-            <span className="text-foreground">salir</span>
+            <span className="text-foreground">{t.footer.exitWord}</span>
             <span className="text-primary cursor-blink ml-1">▌</span>
           </p>
           <p className="font-mono text-xs text-muted-foreground">
             <span className="text-primary/50">// </span>
-            hecho con Next.js & Tailwind — <span className="text-primary/50">©</span> 2025 Antonio Melino
+            {t.footer.builtWith} <span className="text-primary/50">©</span> 2025 Antonio Melino
           </p>
         </div>
       </div>

@@ -1,59 +1,29 @@
+"use client";
+
 import { Globe } from "lucide-react";
-
-// Regional-indicator flag emoji (🇪🇸/🇬🇧) fall back to "ES"/"GB" text on
-// Windows (Segoe UI Emoji lacks flag glyphs), so these render as SVG instead.
-const FlagES = () => (
-  <svg
-    viewBox="0 0 3 2"
-    aria-hidden="true"
-    className="h-3 w-[18px] shrink-0 overflow-hidden rounded-[2px]"
-  >
-    <rect width="3" height="2" fill="#AA151B" />
-    <rect y="0.5" width="3" height="1" fill="#F1BF00" />
-  </svg>
-);
-
-const FlagGB = () => (
-  <svg
-    viewBox="0 0 60 30"
-    aria-hidden="true"
-    className="h-3 w-6 shrink-0 overflow-hidden rounded-[2px]"
-  >
-    <clipPath id="flag-gb-s">
-      <path d="M0,0 v30 h60 v-30 z" />
-    </clipPath>
-    <clipPath id="flag-gb-t">
-      <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
-    </clipPath>
-    <g clipPath="url(#flag-gb-s)">
-      <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
-      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
-      <path
-        d="M0,0 L60,30 M60,0 L0,30"
-        clipPath="url(#flag-gb-t)"
-        stroke="#C8102E"
-        strokeWidth="4"
-      />
-      <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
-      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
-    </g>
-  </svg>
-);
+import { FlagES, FlagGB } from "@/components/flag-icons";
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
 
 type SkillLevel = "core" | "familiar";
 
 interface Skill {
-  name: string;
+  name: { es: string; en: string };
   level: SkillLevel;
 }
 
-const core = (name: string): Skill => ({ name, level: "core" });
-const familiar = (name: string): Skill => ({ name, level: "familiar" });
+const core = (nameEs: string, nameEn?: string): Skill => ({
+  name: { es: nameEs, en: nameEn ?? nameEs },
+  level: "core",
+});
+const familiar = (nameEs: string, nameEn?: string): Skill => ({
+  name: { es: nameEs, en: nameEn ?? nameEs },
+  level: "familiar",
+});
 
 const skillCategories = [
   {
     key: "frontend",
-    title: "Frontend",
     skills: [
       core("React"),
       core("Next.js"),
@@ -69,7 +39,6 @@ const skillCategories = [
   },
   {
     key: "backend",
-    title: "Backend",
     skills: [
       core("C#"),
       core(".NET"),
@@ -78,12 +47,11 @@ const skillCategories = [
       core("Node.js"),
       core("Express.js"),
       core("REST APIs / RESTful"),
-      core("JWT / Autenticación"),
+      core("JWT / Autenticación", "JWT / Authentication"),
     ],
   },
   {
     key: "database",
-    title: "Base de Datos",
     skills: [
       core("PostgreSQL (Supabase)"),
       familiar("Firebase (Firestore)"),
@@ -94,7 +62,6 @@ const skillCategories = [
   },
   {
     key: "devops",
-    title: "DevOps & Cloud",
     skills: [
       core("Git"),
       core("GitHub"),
@@ -107,7 +74,6 @@ const skillCategories = [
   },
   {
     key: "ai",
-    title: "IA & Herramientas de Desarrollo",
     skills: [
       core("Claude Code"),
       familiar("DeepSeek"),
@@ -117,47 +83,48 @@ const skillCategories = [
   },
   {
     key: "soft",
-    title: "Metodologías",
     skills: [
       core("Agile"),
       core("Scrum"),
       core("GitHub Projects"),
-      core("POO"),
-      core("Trabajo colaborativo"),
-      core("Resolución de problemas"),
+      core("POO", "OOP"),
+      core("Trabajo colaborativo", "Team collaboration"),
+      core("Resolución de problemas", "Problem solving"),
     ],
   },
 ];
 
 export function SkillsSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <section id="habilidades" className="py-24 px-6 scroll-mt-20">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-14">
           <p className="font-mono text-xs text-primary/60 mb-3">
-            // 03. tecnologias.config.ts
+            {t.skills.fileComment}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Stack Tecnológico
+            {t.skills.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Tecnologías y herramientas que utilizo para crear soluciones
-            robustas y escalables
+            {t.skills.subtitle}
           </p>
           <div className="mt-4 inline-flex items-center gap-2 max-w-full px-3 py-1.5 border border-border rounded-full bg-secondary/50">
             <Globe size={13} className="text-primary shrink-0" />
             <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-mono text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                 <FlagES />
-                Español nativo
+                {t.skills.nativeLang}
               </span>
               <span className="text-muted-foreground/50" aria-hidden="true">
                 |
               </span>
               <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
                 <FlagGB />
-                Inglés técnico
+                {t.skills.technicalLang}
               </span>
             </div>
           </div>
@@ -194,10 +161,10 @@ export function SkillsSection() {
                   <div className="flex flex-wrap gap-1.5">
                     {coreSkills.map((skill) => (
                       <span
-                        key={skill.name}
+                        key={skill.name.es}
                         className="font-mono text-xs px-2 py-1 border border-primary/20 text-primary/80 bg-primary/5 rounded hover:border-primary/50 hover:text-primary hover:bg-primary/10 transition-all duration-150 cursor-default"
                       >
-                        &quot;{skill.name}&quot;
+                        &quot;{skill.name[language]}&quot;
                       </span>
                     ))}
                   </div>
@@ -205,15 +172,15 @@ export function SkillsSection() {
                   {familiarSkills.length > 0 && (
                     <div>
                       <p className="font-mono text-[11px] text-muted-foreground/60 mb-1.5">
-                        // conocimientos
+                        {t.skills.knowledgeComment}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
                         {familiarSkills.map((skill) => (
                           <span
-                            key={skill.name}
+                            key={skill.name.es}
                             className="font-mono text-xs px-2 py-1 border border-dashed border-border text-muted-foreground/60 rounded hover:border-primary/30 hover:text-muted-foreground transition-all duration-150 cursor-default"
                           >
-                            &quot;{skill.name}&quot;
+                            &quot;{skill.name[language]}&quot;
                           </span>
                         ))}
                       </div>
@@ -234,7 +201,7 @@ export function SkillsSection() {
 
         {/* Extra badges */}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {["CI/CD", "Seguridad en APIs", "Revisión de Código", "Clean Code"].map(
+          {t.skills.extraBadges.map(
             (badge) => (
               <span
                 key={badge}

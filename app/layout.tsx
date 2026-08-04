@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({
@@ -31,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning className="smooth-scroll">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
+        <LanguageProvider defaultLanguage="es">
+          <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
 
 const DEFAULT_PREVIEW_COUNT = 2;
 
@@ -26,6 +28,8 @@ export function CollapsibleAchievements({
   textClassName = "text-muted-foreground",
   extraItemsTopClassName = "pt-2",
 }: CollapsibleAchievementsProps) {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [isExpanded, setIsExpanded] = useState(false);
 
   const hasCollapsibleItems = isMobile && achievements.length > previewCount;
@@ -71,7 +75,9 @@ export function CollapsibleAchievements({
             aria-expanded={isExpanded}
             className="mt-3 font-mono text-xs text-primary hover:text-primary/80 transition-colors"
           >
-            {isExpanded ? "Ver menos" : `Ver ${extraItems.length} más`}
+            {isExpanded
+              ? t.achievements.viewLess
+              : t.achievements.viewMore(extraItems.length)}
           </button>
         </>
       )}

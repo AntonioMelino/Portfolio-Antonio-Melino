@@ -4,19 +4,29 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
+import { useLanguage } from "@/components/language-provider";
+import { translations } from "@/lib/i18n/translations";
+import { FlagES, FlagGB } from "@/components/flag-icons";
 
-const navItems = [
-  { id: "hero",        label: "inicio",      num: "01" },
-  { id: "proyectos",  label: "proyectos",   num: "02" },
-  { id: "habilidades", label: "stack",       num: "03" },
-  { id: "experiencia", label: "experiencia", num: "04" },
-  { id: "educacion",  label: "educación",   num: "05" },
-  { id: "sobre-mi",   label: "sobre_mi",    num: "06" },
-  { id: "contacto",   label: "contacto",    num: "07" },
-];
+const NAV_IDS = [
+  { id: "hero", key: "inicio", num: "01" },
+  { id: "proyectos", key: "proyectos", num: "02" },
+  { id: "habilidades", key: "stack", num: "03" },
+  { id: "experiencia", key: "experiencia", num: "04" },
+  { id: "educacion", key: "educacion", num: "05" },
+  { id: "sobre-mi", key: "sobreMi", num: "06" },
+  { id: "contacto", key: "contacto", num: "07" },
+] as const;
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
+  const t = translations[language];
+  const navItems = NAV_IDS.map(({ id, key, num }) => ({
+    id,
+    num,
+    label: t.header.nav[key],
+  }));
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -54,7 +64,7 @@ export function Header() {
             <button
               onClick={() => scrollToSection("hero")}
               className="flex items-center gap-0 group"
-              aria-label="Ir al inicio"
+              aria-label={t.header.ariaHome}
             >
               <span className="font-mono text-sm">
                 <span className="text-muted-foreground group-hover:text-foreground transition-colors">antonio</span>
@@ -83,9 +93,19 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
+                onClick={toggleLanguage}
+                className="rounded-full border border-border hover:border-primary/50 ml-2 overflow-hidden"
+                aria-label={t.header.ariaLanguage}
+              >
+                {language === "es" ? <FlagGB /> : <FlagES />}
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={toggleTheme}
-                className="rounded-md border border-border hover:border-primary/50 hover:text-primary ml-2"
-                aria-label="Cambiar tema"
+                className="rounded-md border border-border hover:border-primary/50 hover:text-primary"
+                aria-label={t.header.ariaTheme}
               >
                 {theme === "light" ? (
                   <Moon className="h-4 w-4" />
@@ -100,9 +120,18 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
+                onClick={toggleLanguage}
+                className="rounded-full border border-border hover:border-primary/50 overflow-hidden"
+                aria-label={t.header.ariaLanguage}
+              >
+                {language === "es" ? <FlagGB /> : <FlagES />}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={toggleTheme}
                 className="rounded-md border border-border hover:border-primary/50"
-                aria-label="Cambiar tema"
+                aria-label={t.header.ariaTheme}
               >
                 {theme === "light" ? (
                   <Moon className="h-4 w-4" />
@@ -115,7 +144,7 @@ export function Header() {
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="rounded-md border border-border hover:border-primary/50"
-                aria-label="Menú"
+                aria-label={t.header.ariaMenu}
               >
                 {isMobileMenuOpen ? (
                   <X className="h-4 w-4" />
