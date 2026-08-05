@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ExternalLink, Images, Star } from "lucide-react";
+import { ExternalLink, Eye, Images, Star } from "lucide-react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
@@ -264,8 +264,14 @@ function ProjectCard({ project, onSelect }: ProjectCardProps) {
           className="object-contain p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="hidden md:flex absolute bottom-2 right-2 items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Images className="h-3 w-3 text-primary" />
+          <span className="font-mono text-[10px] text-primary">
+            {t.projects.galleryLabel}
+          </span>
+        </div>
+        <div className="flex md:hidden absolute bottom-2 right-2 items-center gap-1 bg-background/80 border border-primary/40 rounded px-1.5 py-0.5">
+          <Eye className="h-3 w-3 text-primary" />
           <span className="font-mono text-[10px] text-primary">
             {t.projects.galleryLabel}
           </span>
@@ -429,8 +435,14 @@ export function ProjectsSection() {
                   className="object-contain p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="hidden md:flex absolute bottom-2 right-2 items-center gap-1 bg-background/80 border border-border rounded px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Images className="h-3 w-3 text-primary" />
+                  <span className="font-mono text-[10px] text-primary">
+                    {t.projects.galleryLabel}
+                  </span>
+                </div>
+                <div className="flex md:hidden absolute bottom-2 right-2 items-center gap-1 bg-background/80 border border-primary/40 rounded px-1.5 py-0.5">
+                  <Eye className="h-3 w-3 text-primary" />
                   <span className="font-mono text-[10px] text-primary">
                     {t.projects.galleryLabel}
                   </span>
