@@ -271,7 +271,7 @@ export const translations: Record<Language, Translations> = {
     },
     footer: {
       exitWord: "salir",
-      builtWith: "hecho con Next.js & Tailwind —",
+      builtWith: "Hecho con ❤ —",
     },
     achievements: {
       viewLess: "Ver menos",
@@ -437,7 +437,7 @@ export const translations: Record<Language, Translations> = {
     },
     footer: {
       exitWord: "exit",
-      builtWith: "built with Next.js & Tailwind —",
+      builtWith: "Made with ❤ —",
     },
     achievements: {
       viewLess: "Show less",
