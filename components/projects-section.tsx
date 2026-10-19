@@ -84,6 +84,39 @@ const projects: Project[] = [
     ],
   },
   {
+    title: "AM Estudio",
+    slug: "am_estudio",
+    description: {
+      es: "Mi estudio independiente de desarrollo de software para pymes y comercios locales, donde además vendo productos digitales. Sitio propio diseñado y desarrollado desde cero con animaciones GSAP y Three.js, diseño responsive, contacto directo por WhatsApp, SEO técnico (Open Graph, sitemap) y encabezados de seguridad (CSP, HSTS).",
+      en: "My independent software development studio for SMBs and local businesses, where I also sell digital products. My own site, designed and built from scratch with GSAP and Three.js animations, responsive design, direct WhatsApp contact, technical SEO (Open Graph, sitemap) and security headers (CSP, HSTS).",
+    },
+    image:
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792372702/AM_Estudio_pagina_principal_fdmbl7.jpg",
+    gif: "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792372702/AM_Estudio_pagina_principal_fdmbl7.jpg",
+    tags: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "GSAP",
+      "Three.js",
+      "SEO",
+      "CSP / HSTS",
+    ],
+    demo: "https://antoniomelino.com/",
+    github: "#",
+    gallery: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792372702/AM_Estudio_pagina_principal_fdmbl7.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792373545/AM_Estudio_-_pantalla_proyectos_daq2ry.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792373544/AM_Estudio_-_pantalla_trabajos_turdl8.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792373545/AM_Estudio_-_pantalla_quien_soy_jhmzmo.jpg",
+    ],
+    galleryMobile: [
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792373128/AM_Estudio_pantalla_principal_Mobile_ouwhle.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792373122/AM_Estudio_pantalla_trabajos_Mobile_jcspri.jpg",
+      "https://res.cloudinary.com/dhwsxp2c8/image/upload/v1792373121/AM_Estudio_pantalla_proyectos_Mobile_vnahtx.jpg",
+    ],
+  },
+  {
     title: "Bitácora",
     slug: "bitacora",
     description: {
@@ -378,10 +411,10 @@ export function ProjectsSection() {
           <p className="font-mono text-xs text-primary/60 mb-3">
             {t.projects.fileComment}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.projects.title}</h2>
-          <p className="text-lg text-muted-foreground">
-            {t.projects.subtitle}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            {t.projects.title}
+          </h2>
+          <p className="text-lg text-muted-foreground">{t.projects.subtitle}</p>
         </div>
 
         {/* Featured project */}
@@ -546,7 +579,10 @@ export function ProjectsSection() {
             <CarouselContent>
               {otherProjects.map((project) => (
                 <CarouselItem key={project.title} className="basis-[85%]">
-                  <ProjectCard project={project} onSelect={setSelectedProject} />
+                  <ProjectCard
+                    project={project}
+                    onSelect={setSelectedProject}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -613,7 +649,10 @@ export function ProjectsSection() {
                         >
                           <Image
                             src={src}
-                            alt={t.projects.screenshotAlt(index + 1, selectedProject.title)}
+                            alt={t.projects.screenshotAlt(
+                              index + 1,
+                              selectedProject.title,
+                            )}
                             fill
                             className="object-contain"
                             sizes="100vw"
